@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "FakeItEasy .NET Core",
+  "authors": [ "" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "Castle.Core": "3.3.3"
+      }
+    },
+    "dotnet5.4": {
+      "dependencies": {
+        "Castle.Core": "3.3.4",
+        "System.Collections.Concurrent": "4.0.11-beta-23516"
+      }
+    }
+  }
+}
