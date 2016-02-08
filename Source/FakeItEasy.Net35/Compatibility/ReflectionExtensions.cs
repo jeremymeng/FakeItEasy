@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Reflection;
 
 namespace FakeItEasy
 {
@@ -15,6 +13,11 @@ namespace FakeItEasy
         public static Type GetTypeInfo(this Type type)
         {
             return type;
+        }
+
+        public static MethodInfo GetMethodInfo(this Delegate @delegate)
+        {
+            return @delegate.Method;
         }
     }
 }
