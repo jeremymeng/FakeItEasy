@@ -7,14 +7,12 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "net451": {
-      "dependencies": {
-        "Castle.Core": "3.3.3"
-      }
-    },
     "dotnet5.4": {
+      "compilationOptions": {
+        "define": [ "FEATURE_NETCORE_REFLECTION" ]
+      },
       "dependencies": {
-        "Castle.Core": "3.3.4",
+        "Castle.Core": "3.3.4-dev",
         "System.Collections.Concurrent": "4.0.11-beta-23516"
       }
     }
