@@ -14,6 +14,7 @@
       "dependencies": {
         "Castle.Core": "3.3.4-dev",
         "System.Collections.Concurrent": "4.0.11-beta-23516",
+        "System.Reflection.Context": "4.0.1-beta-23516",
         "System.Reflection.Extensions": "4.0.1-beta-23516",
         "System.Reflection.TypeExtensions": "4.1.0-beta-23516"
       }
