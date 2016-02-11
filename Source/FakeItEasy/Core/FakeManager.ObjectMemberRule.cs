@@ -2,9 +2,8 @@ namespace FakeItEasy.Core
 {
     using System;
     using System.Collections.Generic;
-#if FEATURE_NETCORE_REFLECTION
+    using System.Linq;
     using System.Reflection;
-#endif
     using FakeItEasy.Creation;
 
     /// <content>Object member rule.</content>
@@ -16,12 +15,12 @@ namespace FakeItEasy.Core
         private class ObjectMemberRule
             : IFakeObjectCallRule
         {
-            private static readonly List<RuntimeMethodHandle> ObjectMethodsMethodHandles =
-                new List<RuntimeMethodHandle>
+            private static readonly List<MethodInfo> ObjectMethods =
+                new List<MethodInfo>
                     {
-                        typeof(object).GetMethod("Equals", new[] { typeof(object) }).MethodHandle,
-                        typeof(object).GetMethod("ToString", new Type[] { }).MethodHandle,
-                        typeof(object).GetMethod("GetHashCode", new Type[] { }).MethodHandle
+                        typeof(object).GetMethod("Equals", new[] { typeof(object) }),
+                        typeof(object).GetMethod("ToString", new Type[] { }),
+                        typeof(object).GetMethod("GetHashCode", new Type[] { })
                     };
 
             public FakeManager FakeManager { get; set; }
@@ -56,12 +55,16 @@ namespace FakeItEasy.Core
 
             private static bool IsObjetMethod(IFakeObjectCall fakeObjectCall)
             {
-                return ObjectMethodsMethodHandles.Contains(fakeObjectCall.Method.MethodHandle);
+                return ObjectMethods[0].Module.Equals(fakeObjectCall.Method.Module) && ObjectMethods[0].Name.Equals(fakeObjectCall.Method.Name) ||
+                       ObjectMethods[1].Module.Equals(fakeObjectCall.Method.Module) && ObjectMethods[1].Name.Equals(fakeObjectCall.Method.Name) ||
+                       ObjectMethods[2].Module.Equals(fakeObjectCall.Method.Module) && ObjectMethods[2].Name.Equals(fakeObjectCall.Method.Name);
+                //return ObjectMethods.Any(m => m.Module.Equals(fakeObjectCall.Method.Module) && m.Name.Equals(fakeObjectCall.Method.Name));
             }
 
             private bool TryHandleGetHashCode(IInterceptedFakeObjectCall fakeObjectCall)
             {
-                if (!fakeObjectCall.Method.MethodHandle.Equals(ObjectMethodsMethodHandles[2]))
+                if (!fakeObjectCall.Method.Module.Equals(ObjectMethods[2].Module) ||
+                    !fakeObjectCall.Method.Name.Equals(ObjectMethods[2].Name))
                 {
                     return false;
                 }
@@ -73,7 +76,8 @@ namespace FakeItEasy.Core
 
             private bool TryHandleToString(IInterceptedFakeObjectCall fakeObjectCall)
             {
-                if (!fakeObjectCall.Method.MethodHandle.Equals(ObjectMethodsMethodHandles[1]))
+                if (!fakeObjectCall.Method.Module.Equals(ObjectMethods[1].Module) ||
+                    !fakeObjectCall.Method.Name.Equals(ObjectMethods[1].Name))
                 {
                     return false;
                 }
@@ -85,7 +89,8 @@ namespace FakeItEasy.Core
 
             private bool TryHandleEquals(IInterceptedFakeObjectCall fakeObjectCall)
             {
-                if (!fakeObjectCall.Method.MethodHandle.Equals(ObjectMethodsMethodHandles[0]))
+                if (!fakeObjectCall.Method.Module.Equals(ObjectMethods[0].Module) ||
+                    !fakeObjectCall.Method.Name.Equals(ObjectMethods[0].Name))
                 {
                     return false;
                 }
