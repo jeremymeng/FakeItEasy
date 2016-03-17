@@ -15,7 +15,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
     public class CastleDynamicProxyGeneratorTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private readonly object[] supportedTypes =
+        private static readonly object[] SupportedTypes =
         {
             typeof(IInterfaceType),
             typeof(AbstractClass),
@@ -25,7 +25,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
         };
 
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private readonly object[] notSupportedTypes =
+        private static readonly object[] NotSupportedTypes =
         {
             typeof(int),
             typeof(ClassWithPrivateConstructor)
@@ -47,7 +47,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             this.generator = new CastleDynamicProxyGenerator(this.interceptionValidator);
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_return_proxy_that_can_be_tagged(Type typeOfProxy)
         {
             // Arrange
@@ -59,7 +59,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             result.GeneratedProxy.Should().NotBeNull().And.BeAssignableTo<ITaggable>();
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_return_proxy_where_tag_can_be_set(Type typeOfProxy)
         {
             // Arrange
@@ -73,7 +73,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             proxy.Tag.Should().BeSameAs(tag);
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_return_proxy_that_is_of_the_specified_type(Type typeOfProxy)
         {
             // Arrange
@@ -86,7 +86,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
                 .And.Subject.Should().Match(p => typeOfProxy.IsAssignableFrom(p.GetType()));
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_return_result_with_ProxyWasSuccessfullyGenerated_set_to_true(Type typeOfProxy)
         {
             // Arrange
@@ -98,7 +98,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             result.ProxyWasSuccessfullyGenerated.Should().BeTrue();
         }
 
-        [TestCaseSource("notSupportedTypes")]
+        [TestCaseSource("NotSupportedTypes")]
         public void Should_return_result_with_ProxyWasSuccessfullyGenerated_set_to_false_when_proxy_cannot_be_generated(Type typeOfProxy)
         {
             // Arrange
@@ -110,7 +110,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             result.ProxyWasSuccessfullyGenerated.Should().BeFalse();
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_delegate_to_fake_call_processor_when_method_on_fake_is_called(Type typeThatImplementsInterfaceType)
         {
             // Arrange
@@ -132,7 +132,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             interceptedFakeObjectCall.FakedObject.Should().BeSameAs(proxy);
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_ensure_fake_call_processor_is_initialized_but_not_fetched_when_no_method_on_fake_is_called(Type typeThatImplementsInterfaceType)
         {
             // Arrange
@@ -146,7 +146,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             A.CallTo(() => fakeCallProcessorProvider.EnsureInitialized(A<object>._)).MustHaveHappened();
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Serialized_proxies_should_deserialize_to_an_object(Type typeOfProxy)
         {
             // Arrange
@@ -214,7 +214,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             result.ReasonForFailure.Should().StartWith("No usable default constructor was found on the type System.AppDomainInitializerInfo.\r\nAn exception of type Castle.DynamicProxy.Generators.GeneratorException was caught during this call. Its message was:\r\nCan not create proxy for type System.AppDomainInitializerInfo because it is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo(\"DynamicProxyGenAssembly2, PublicKey=0024000004800000940000000602000000240000525341310004000001000100c547cac37abd99c8db225ef2f6c8a3602f3b3606cc9891605d02baa56104f4cfc0734aa39b93bf7852f7d9266654753cc297e7d2edfe0bac1cdcf9f717241550e0a7b191195b7667bb4f64bcb8e2121380fd1d9d46ad2d92d2d15605093924cceaf74c4861eff62abf69b9291ed0a340e113be11e6a7d3113e92484cf7045cc7\")] attribute, because assembly mscorlib is strong-named.");
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_implement_additional_interfaces(Type typeOfProxy)
         {
             // Arrange
@@ -287,7 +287,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
                 .WithMessage("Arguments for constructor specified for interface type.");
         }
 
-        [TestCaseSource("supportedTypes")]
+        [TestCaseSource("SupportedTypes")]
         public void Should_be_able_to_intercept_ToString(Type typeOfProxy)
         {
             // Arrange

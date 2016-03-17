@@ -4,13 +4,14 @@ Imports FakeItEasy.Tests
 <TestFixture()> _
 Public Class NextCallTests
 
-    <Test(), ExpectedException(GetType(ExpectationException))> _
+    <Test()>
     Public Overridable Sub AssertWasCalled_should_fail_when_call_has_not_been_made()
+        Assert.Throws(Of ExpectationException)(Sub()
+                                                   Dim foo = A.Fake(Of IFoo)()
 
-        Dim foo = A.Fake(Of IFoo)()
-
-        NextCall.To(foo).MustHaveHappened()
-        foo.Bar()
+                                                   NextCall.To(foo).MustHaveHappened()
+                                                   foo.Bar()
+                                               End Sub)
     End Sub
 
     <Test()> _
@@ -23,14 +24,16 @@ Public Class NextCallTests
         foo.Bar()
     End Sub
 
-    <Test(), ExpectedException(GetType(ExpectationException))> _
+    <Test()>
     Public Overridable Sub AssertWasCalled_with_arguments_specified_should_fail_if_not_argument_predicate_passes()
-        Dim foo = A.Fake(Of IFoo)()
+        Assert.Throws(Of ExpectationException)(Sub()
+                                                   Dim foo = A.Fake(Of IFoo)()
 
-        foo.Bar("something", "")
+                                                   foo.Bar("something", "")
 
         NextCall.To(foo).WhenArgumentsMatch(Function(a) a.Get(Of String)(0) = "something else").MustHaveHappened(Repeated.Exactly.Once)
-        foo.Bar(Nothing, Nothing)
+                                                   foo.Bar(Nothing, Nothing)
+                                               End Sub)
     End Sub
 
     <Test()> _

@@ -9,7 +9,7 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
     {
         private static readonly SomeRefType TheRealThing = new SomeRefType { Value = "Foo" };
 
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get
             {
@@ -18,7 +18,7 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
             }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get { yield return TheRealThing; }
         }

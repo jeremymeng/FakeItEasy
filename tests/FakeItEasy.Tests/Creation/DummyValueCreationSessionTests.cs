@@ -13,7 +13,7 @@ namespace FakeItEasy.Tests.Creation
     public class DummyValueCreationSessionTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private readonly object[] dummiesInContainer =
+        private static readonly object[] DummiesInContainer =
             {
                 "dummy value",
                 new Task<int>(() => 7),
@@ -28,7 +28,7 @@ namespace FakeItEasy.Tests.Creation
             this.fakeObjectCreator = A.Fake<IFakeObjectCreator>();
         }
 
-        [TestCaseSource("dummiesInContainer")]
+        [TestCaseSource("DummiesInContainer")]
         public void Should_return_dummy_from_container_when_available(object dummyInContainer)
         {
             Guard.AgainstNull(dummyInContainer, "dummyInContainer");

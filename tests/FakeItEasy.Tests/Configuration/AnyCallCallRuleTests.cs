@@ -8,9 +8,9 @@ namespace FakeItEasy.Tests.Configuration
     [TestFixture]
     public class AnyCallCallRuleTests
     {
-        [TestCase(typeof(int), Result = true)]
-        [TestCase(typeof(string), Result = false)]
-        [TestCase(null, Result = true)]
+        [TestCase(typeof(int), ExpectedResult = true)]
+        [TestCase(typeof(string), ExpectedResult = false)]
+        [TestCase(null, ExpectedResult = true)]
         public bool IsApplicableTo_should_check_the_ApplicableToMembersWithReturnType_property(Type type)
         {
             // Arrange

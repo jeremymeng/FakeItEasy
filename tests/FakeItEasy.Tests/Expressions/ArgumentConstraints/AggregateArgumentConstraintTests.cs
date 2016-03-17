@@ -14,7 +14,7 @@ namespace FakeItEasy.Tests.Expressions.ArgumentConstraints
             void Method(string firstArgument, params object[] args);
         }
 
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get
             {
@@ -28,7 +28,7 @@ namespace FakeItEasy.Tests.Expressions.ArgumentConstraints
             }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get
             {

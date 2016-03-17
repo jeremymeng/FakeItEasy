@@ -146,7 +146,7 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             proxy.Invoke();
         }
 
-        [Test, Ignore]
+        [Test, Ignore("")]
         public void Should_return_proxy_where_out_parameter_can_be_set()
         {
             // Arrange

@@ -33,9 +33,9 @@ namespace FakeItEasy.Tests
                 A.Fake<IAssertConfiguration>().MustHaveHappened());
         }
 
-        [TestCase(0, Result = true)]
-        [TestCase(1, Result = false)]
-        [TestCase(3, Result = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = false)]
+        [TestCase(3, ExpectedResult = false)]
         public bool MustNotHaveHappened_should_call_configuration_with_repeat_that_validates_correctly(int repeat)
         {
             // Arrange

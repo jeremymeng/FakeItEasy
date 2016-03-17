@@ -9,12 +9,12 @@ namespace FakeItEasy.Tests.ExpressionsConstraints
     internal class EqualityArgumentConstraintTests
         : ArgumentConstraintTestBase
     {
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get { return new[] { null, new object(), Guid.NewGuid(), "FOO", " foo " }; }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get { return new object[] { 1 }; }
         }
