@@ -24,11 +24,8 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
     [TestFixture]
     public class CastleDynamicProxyInterceptionValidatorTests
     {
-        private CastleDynamicProxyInterceptionValidator validator;
-        private MethodInfoManager methodInfoManager;
-
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private object[] nonInterceptableMembers = new[]
+        private static object[] nonInterceptableMembers = new[]
         {
             NonInterceptableTestCase.Create(() => new object().GetType(), "Non virtual methods can not be intercepted."),
             NonInterceptableTestCase.Create(() => object.Equals("foo", "bar"), "Static methods can not be intercepted."),
@@ -37,11 +34,14 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
         };
 
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private InterceptionTestCase[] interceptableMethods = new[]
+        private static InterceptionTestCase[] interceptableMethods = new[]
         {
             InterceptionTestCase.Create(() => new object().ToString()),
             InterceptionTestCase.Create(() => ((IBInterface)A.Fake<IAInterface>(builder => builder.Implements(typeof(IBInterface)))).Method())
         };
+
+        private CastleDynamicProxyInterceptionValidator validator;
+        private MethodInfoManager methodInfoManager;
 
         [SetUp]
         public void Setup()

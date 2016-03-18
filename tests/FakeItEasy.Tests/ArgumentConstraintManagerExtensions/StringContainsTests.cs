@@ -7,12 +7,12 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
     internal class StringContainsTests
         : ArgumentConstraintTestBase<string>
     {
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get { return new object[] { "foo", "baz", "biz", string.Empty, null, "lorem ipsum" }; }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get { return new object[] { "bar", "barcode", "foo bar", "unbareable ;-)" }; }
         }

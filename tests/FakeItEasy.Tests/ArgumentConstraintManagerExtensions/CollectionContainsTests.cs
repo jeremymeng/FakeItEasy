@@ -7,7 +7,7 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
     internal class CollectionContainsTests
         : ArgumentConstraintTestBase<IEnumerable<object>>
     {
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get
             {
@@ -18,7 +18,7 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
             }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get
             {

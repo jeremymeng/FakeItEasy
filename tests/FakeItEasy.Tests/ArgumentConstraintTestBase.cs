@@ -9,9 +9,9 @@ namespace FakeItEasy.Tests
     {
         protected internal IArgumentConstraint ConstraintField { get; set; }
 
-        protected abstract IEnumerable<object> InvalidValues { get; }
+        protected static IEnumerable<object> InvalidValues { get; }
 
-        protected abstract IEnumerable<object> ValidValues { get; }
+        protected static IEnumerable<object> ValidValues { get; }
 
         protected abstract string ExpectedDescription { get; }
 

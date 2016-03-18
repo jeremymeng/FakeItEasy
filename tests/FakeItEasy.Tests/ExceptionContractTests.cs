@@ -50,7 +50,7 @@ namespace FakeItEasy.Tests
             var result = (T)constructor.Invoke(new object[] { "A message" });
 
             // Assert
-            Assert.That(result.Message, Is.StringStarting("A message"));
+            Assert.That(result.Message, Does.StartWith("A message"));
         }
 
         [Test]

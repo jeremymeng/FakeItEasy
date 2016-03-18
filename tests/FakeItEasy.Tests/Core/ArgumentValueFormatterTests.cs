@@ -14,7 +14,7 @@ namespace FakeItEasy.Tests.Core
     public class ArgumentValueFormatterTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private readonly object[] specificCases = TestCases.Create(
+        private static readonly object[] SpecificCases = TestCases.Create(
             new
             {
                 LessSpecific = typeof(object),
@@ -95,7 +95,7 @@ namespace FakeItEasy.Tests.Core
             result.Should().Be("stream");
         }
 
-        [TestCaseSource("specificCases")]
+        [TestCaseSource("SpecificCases")]
         public void Should_favor_most_specific_formatter_when_more_than_one_is_applicable(Type lessSpecific, Type moreSpecific, object value)
         {
             // Arrange
@@ -123,8 +123,8 @@ namespace FakeItEasy.Tests.Core
             result.Should().Be("high priority");
         }
 
-        [TestCase("", Result = "string.Empty")]
-        [TestCase("string value", Result = "\"string value\"")]
+        [TestCase("", ExpectedResult = "string.Empty")]
+        [TestCase("string value", ExpectedResult = "\"string value\"")]
         public string Should_format_string_values_correct_by_default(string value)
         {
             return this.formatter.GetArgumentValueAsString(value);

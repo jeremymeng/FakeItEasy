@@ -8,12 +8,12 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
     internal class IsInstanceOfTests
         : ArgumentConstraintTestBase<object>
     {
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get { return new object[] { new object(), 1, "foo", null }; }
         }
 
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get { return new object[] { new DateTime(2000, 1, 1) }; }
         }

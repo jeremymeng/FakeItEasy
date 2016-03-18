@@ -16,13 +16,13 @@ namespace FakeItEasy.IntegrationTests
         public void Should_warn_of_duplicate_input_assemblies_with_different_paths()
         {
             // Arrange
-            var currentDirectoryName = new DirectoryInfo(Environment.CurrentDirectory).Name;
+            var currentDirectoryName = new DirectoryInfo(TestContext.CurrentContext.TestDirectory).Name;
 
             // FakeItEasy.IntegrationTests.External has copies of many of the assemblies used in these
             // tests as well. By specifying assembly paths from that directory, the catalog will see
             // those assemblies in both locations, and should fail to load the duplicates.
             var directoryToScan = Path.Combine(
-                Environment.CurrentDirectory,
+                TestContext.CurrentContext.TestDirectory,
                 Path.Combine(@"..\..\..\FakeItEasy.IntegrationTests.External\bin", currentDirectoryName));
 
             var expectedMessageFormat =
@@ -135,7 +135,7 @@ namespace FakeItEasy.IntegrationTests
             var catalogue = new TypeCatalogue();
 
             // Act
-            catalogue.Load(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
+            catalogue.Load(Directory.GetFiles(TestContext.CurrentContext.TestDirectory, "*.dll"));
 
             // Assert
             catalogue.GetAvailableTypes().Select(type => type.FullName).Should().Contain("FakeItEasy.IntegrationTests.External.GuidValueFormatter");

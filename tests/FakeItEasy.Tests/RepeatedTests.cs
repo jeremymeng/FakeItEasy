@@ -10,7 +10,7 @@ namespace FakeItEasy.Tests
     public class RepeatedTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private object[] descriptionTestCases = TestCases.Create(
+        private static object[] descriptionTestCases = TestCases.Create(
             new RepeatDescriptionTestCase()
             {
                 Repeat = () => Repeated.AtLeast.Once,
@@ -67,8 +67,8 @@ namespace FakeItEasy.Tests
                 ExpectedDescription = "exactly 99 times"
             }).AsTestCaseSource();
 
-        [TestCase(1, 1, Result = true)]
-        [TestCase(1, 2, Result = false)]
+        [TestCase(1, 1, ExpectedResult = true)]
+        [TestCase(1, 2, ExpectedResult = false)]
         public bool Like_should_return_instance_that_delegates_to_expression(int expected, int actual)
         {
             // Arrange
@@ -94,8 +94,8 @@ namespace FakeItEasy.Tests
             Assert.That(happened.ToString(), Is.EqualTo("the number of times specified by the predicate 'repeat => (repeat == 1)'"));
         }
 
-        [TestCase(1, Result = true)]
-        [TestCase(2, Result = false)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = false)]
         public bool Exactly_once_should_only_match_one(int actualRepeat)
         {
             // Arrange
@@ -107,8 +107,8 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(2, Result = true)]
-        [TestCase(0, Result = false)]
+        [TestCase(2, ExpectedResult = true)]
+        [TestCase(0, ExpectedResult = false)]
         public bool Exactly_twice_should_only_match_two(int actualRepeat)
         {
             // Arrange
@@ -120,8 +120,8 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, 0, Result = true)]
-        [TestCase(0, 1, Result = false)]
+        [TestCase(0, 0, ExpectedResult = true)]
+        [TestCase(0, 1, ExpectedResult = false)]
         public bool Exactly_number_of_times_should_match_as_expected(int actualRepeat, int expectedNumberOfTimes)
         {
             // Arrange
@@ -133,9 +133,9 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(1, Result = true)]
-        [TestCase(0, Result = false)]
-        [TestCase(2, Result = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(0, ExpectedResult = false)]
+        [TestCase(2, ExpectedResult = true)]
         public bool At_least_once_should_match_one_or_higher(int actualRepeat)
         {
             // Arrange
@@ -147,10 +147,10 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(1, Result = false)]
-        [TestCase(0, Result = false)]
-        [TestCase(2, Result = true)]
-        [TestCase(3, Result = true)]
+        [TestCase(1, ExpectedResult = false)]
+        [TestCase(0, ExpectedResult = false)]
+        [TestCase(2, ExpectedResult = true)]
+        [TestCase(3, ExpectedResult = true)]
         public bool At_least_twice_should_only_match_two_or_higher(int actualRepeat)
         {
             // Arrange
@@ -162,11 +162,11 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, 0, Result = true)]
-        [TestCase(1, 0, Result = true)]
-        [TestCase(1, 1, Result = true)]
-        [TestCase(0, 1, Result = false)]
-        [TestCase(2, 1, Result = true)]
+        [TestCase(0, 0, ExpectedResult = true)]
+        [TestCase(1, 0, ExpectedResult = true)]
+        [TestCase(1, 1, ExpectedResult = true)]
+        [TestCase(0, 1, ExpectedResult = false)]
+        [TestCase(2, 1, ExpectedResult = true)]
         public bool At_least_number_of_times_should_match_as_expected(int actualRepeat, int expectedNumberOfTimes)
         {
             // Arrange
@@ -178,9 +178,9 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, Result = true)]
-        [TestCase(1, Result = true)]
-        [TestCase(2, Result = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = false)]
         public bool No_more_than_once_should_match_zero_and_one_only(int actualRepeat)
         {
             // Arrange
@@ -192,10 +192,10 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, Result = true)]
-        [TestCase(1, Result = true)]
-        [TestCase(2, Result = true)]
-        [TestCase(3, Result = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = true)]
+        [TestCase(2, ExpectedResult = true)]
+        [TestCase(3, ExpectedResult = false)]
         public bool No_more_than_twice_should_match_zero_one_and_two_only(int actualRepeat)
         {
             // Arrange
@@ -207,11 +207,11 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, 0, Result = true)]
-        [TestCase(1, 0, Result = false)]
-        [TestCase(1, 1, Result = true)]
-        [TestCase(0, 1, Result = true)]
-        [TestCase(2, 1, Result = false)]
+        [TestCase(0, 0, ExpectedResult = true)]
+        [TestCase(1, 0, ExpectedResult = false)]
+        [TestCase(1, 1, ExpectedResult = true)]
+        [TestCase(0, 1, ExpectedResult = true)]
+        [TestCase(2, 1, ExpectedResult = false)]
         public bool No_more_than_times_should_match_as_expected(int actualRepeat, int expectedNumberOfTimes)
         {
             // Arrange
@@ -223,8 +223,8 @@ namespace FakeItEasy.Tests
             return repeated.Matches(actualRepeat);
         }
 
-        [TestCase(0, Result = true)]
-        [TestCase(1, Result = false)]
+        [TestCase(0, ExpectedResult = true)]
+        [TestCase(1, ExpectedResult = false)]
         public bool Never_should_match_zero_only(int actualRepeat)
         {
             // Arrange

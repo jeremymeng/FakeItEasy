@@ -7,12 +7,12 @@ namespace FakeItEasy.Tests.ArgumentConstraintManagerExtensions
     internal class IsNullTests
         : ArgumentConstraintTestBase<object>
     {
-        protected override IEnumerable<object> ValidValues
+        protected static new IEnumerable<object> ValidValues
         {
             get { return new object[] { null }; }
         }
 
-        protected override IEnumerable<object> InvalidValues
+        protected static new IEnumerable<object> InvalidValues
         {
             get { return new object[] { string.Empty, "foo", "bar" }; }
         }

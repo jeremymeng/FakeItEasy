@@ -13,7 +13,7 @@ namespace FakeItEasy.Tests
     public class ServiceLocatorTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private readonly Type[] singletonTypes =
+        private static readonly Type[] SingletonTypes =
         {
             typeof(IExpressionCallMatcherFactory),
             typeof(ExpressionArgumentConstraintFactory),
@@ -21,7 +21,7 @@ namespace FakeItEasy.Tests
         };
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used reflectively.")]
-        private IEnumerable<Type> NonSingletonTypes
+        private static IEnumerable<Type> NonSingletonTypes
         {
             get { return Enumerable.Empty<Type>(); }
         }
@@ -33,7 +33,7 @@ namespace FakeItEasy.Tests
         }
 
         [Test]
-        public void Should_be_registered_as_singleton([ValueSource("singletonTypes")] Type type)
+        public void Should_be_registered_as_singleton([ValueSource("SingletonTypes")] Type type)
         {
             var first = ServiceLocator.Current.Resolve(type);
             var second = ServiceLocator.Current.Resolve(type);
