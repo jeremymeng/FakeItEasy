@@ -16,6 +16,14 @@ namespace FakeItEasy.Tests
     {
         private ConstraintState state;
 
+        public override string Description
+        {
+            get
+            {
+                return "Calls to {0} should be null guarded.".FormatInvariant(this.state.ToString());
+            }
+        }
+
         /// <summary>
         /// Asserts that the specified call is properly null guarded.
         /// </summary>
@@ -35,11 +43,12 @@ namespace FakeItEasy.Tests
         /// Checks that non all of the parameters of the specified expression are
         /// properly null guarded.
         /// </summary>
+        /// <typeparam name="TActual">Type of the actual parameter.</typeparam>
         /// <param name="actual">A <see cref="System.Linq.Expression{System.Action}" /> specifying the call to be checked.</param>
         /// <returns>True if it's properly guarded, false if not.</returns>
         /// <exception cref="ArgumentNullException">The specified value is null.</exception>
         /// <exception cref="ArgumentException">The specified value is not a <see cref="System.Linq.Expression{System.Action}" />.</exception>
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
             if (actual == null)
             {
@@ -53,27 +62,7 @@ namespace FakeItEasy.Tests
                 throw new ArgumentException("The value passed to a NullGuardedConstraint must be of the type System.Linq.Expression<System.Action>.", "actual");
             }
 
-            return this.Matches(expression);
-        }
-
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            Guard.AgainstNull(writer, "writer");
-
-            writer.WritePredicate("Calls to {0} should be null guarded.".FormatInvariant(this.state.ToString()));
-        }
-
-        public override void WriteActualValueTo(MessageWriter writer)
-        {
-            Guard.AgainstNull(writer, "writer");
-
-            writer.WriteLine("When called with the following arguments the method did not throw the appropriate exception:");
-
-            foreach (var failingCall in this.state.GetFailingCallsDescriptions())
-            {
-                writer.Write("            ");
-                writer.WriteLine(failingCall);
-            }
+            return new ConstraintResult(this, actual, this.Matches(expression));
         }
 
         private static ConstraintState CreateCall(Expression<Action> methodCall)

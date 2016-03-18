@@ -16,8 +16,8 @@ namespace FakeItEasy.Tests.Core
             this.constraintManager = new DefaultArgumentConstraintManager<string>(x => this.createdConstraint = x);
         }
 
-        [TestCase(true, Result = true)]
-        [TestCase(false, Result = false)]
+        [TestCase(true, ExpectedResult = true)]
+        [TestCase(false, ExpectedResult = false)]
         public bool Should_add_constraint_that_is_validated_by_the_specified_predicate(bool predicateIsValid)
         {
             // Arrange
@@ -65,8 +65,8 @@ namespace FakeItEasy.Tests.Core
             Assert.That(passedInWriter, Is.EqualTo(writerFromOutside));
         }
 
-        [TestCase(true, Result = false)]
-        [TestCase(false, Result = true)]
+        [TestCase(true, ExpectedResult = false)]
+        [TestCase(false, ExpectedResult = true)]
         public bool Should_add_constraint_that_is_validated_inversed_by_the_specified_predicate_when_prefixing_with_not(bool predicateIsValid)
         {
             // Arrange

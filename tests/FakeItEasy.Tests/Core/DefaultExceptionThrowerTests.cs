@@ -12,10 +12,8 @@ namespace FakeItEasy.Tests.Core
     [TestFixture]
     internal class DefaultExceptionThrowerTests
     {
-        private DefaultExceptionThrower thrower;
-
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private object[] resolvedConstructorsTestCases = TestCases.Create(
+        private static object[] resolvedConstructorsTestCases = TestCases.Create(
             new
             {
                 TypeOfFake = typeof(string),
@@ -155,6 +153,8 @@ namespace FakeItEasy.Tests.Core
 
 "
             }).AsTestCaseSource();
+
+        private DefaultExceptionThrower thrower;
 
         [SetUp]
         public void Setup()

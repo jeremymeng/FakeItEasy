@@ -12,7 +12,7 @@ namespace FakeItEasy.Tests.Configuration
     public class BuildableCallRuleTests
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used reflectively.")]
-        private object[] defaultReturnValueCases = TestCases.Create(
+        private static object[] defaultReturnValueCases = TestCases.Create(
             new
             {
                 MethodName = "IntReturn",
@@ -146,8 +146,8 @@ namespace FakeItEasy.Tests.Configuration
                 .MustHaveHappened();
         }
 
-        [TestCase(true, Result = true)]
-        [TestCase(false, Result = false)]
+        [TestCase(true, ExpectedResult = true)]
+        [TestCase(false, ExpectedResult = false)]
         public bool Apply_should_return_return_value_from_on_is_applicable_to_when_a_where_predicate_is_not_set(bool resultFromOnIsApplicableTo)
         {
             // Arrange

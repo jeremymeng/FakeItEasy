@@ -172,8 +172,8 @@ namespace FakeItEasy.Tests.Expressions
             argumentsPassedToPredicate.Should().BeEquivalentTo(new object[] { 1, 2 });
         }
 
-        [TestCase(true, Result = true)]
-        [TestCase(false, Result = false)]
+        [TestCase(true, ExpectedResult = true)]
+        [TestCase(false, ExpectedResult = false)]
         public bool UsePredicateToValidateArguments_should_configure_matcher_to_return_predicate_result_when_method_matches(bool predicateReturnValue)
         {
             this.StubMethodInfoManagerToReturn(true);
