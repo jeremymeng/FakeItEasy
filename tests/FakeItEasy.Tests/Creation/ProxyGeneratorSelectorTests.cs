@@ -1,6 +1,9 @@
 namespace FakeItEasy.Tests.Creation
 {
     using System;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using FakeItEasy.Core;
     using FakeItEasy.Creation;
     using FakeItEasy.Creation.DelegateProxies;

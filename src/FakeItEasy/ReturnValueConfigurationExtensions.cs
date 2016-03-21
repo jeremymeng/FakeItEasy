@@ -136,7 +136,7 @@ namespace FakeItEasy
 
             return configuration.ReturnsLazily(call =>
             {
-                ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.Method, NameOfReturnsLazilyFeature);
+                ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.GetMethodInfo(), NameOfReturnsLazilyFeature);
 
                 return TaskHelper.FromResult(valueProducer(call.GetArgument<T1>(0)));
             });
@@ -189,7 +189,7 @@ namespace FakeItEasy
 
             return configuration.ReturnsLazily(call =>
             {
-                ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.Method, NameOfReturnsLazilyFeature);
+                ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.GetMethodInfo(), NameOfReturnsLazilyFeature);
 
                 return TaskHelper.FromResult(valueProducer(call.GetArgument<T1>(0), call.GetArgument<T2>(1)));
             });
@@ -244,7 +244,7 @@ namespace FakeItEasy
 
             return configuration.ReturnsLazily(call =>
                 {
-                    ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.Method, NameOfReturnsLazilyFeature);
+                    ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.GetMethodInfo(), NameOfReturnsLazilyFeature);
 
                     return TaskHelper.FromResult(valueProducer(call.GetArgument<T1>(0), call.GetArgument<T2>(1), call.GetArgument<T3>(2)));
                 });
@@ -301,7 +301,7 @@ namespace FakeItEasy
 
             return configuration.ReturnsLazily(call =>
                 {
-                    ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.Method, NameOfReturnsLazilyFeature);
+                    ValueProducerSignatureHelper.AssertThatValueProducerSignatureSatisfiesCallSignature(call.Method, valueProducer.GetMethodInfo(), NameOfReturnsLazilyFeature);
 
                     return TaskHelper.FromResult(valueProducer(call.GetArgument<T1>(0), call.GetArgument<T2>(1), call.GetArgument<T3>(2), call.GetArgument<T4>(3)));
                 });

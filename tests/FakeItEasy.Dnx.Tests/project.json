@@ -10,17 +10,19 @@
     "FluentAssertions": "4.2.2"
   },
   "commands": {
-    "run": ""
+    "run": "FakeItEasy.Dnx.Tests"
   },
   "compilationOptions": {  },
   "frameworks": {
     "dnxcore50": {
-      "compilationOptions": { "define": [ "NUNITLITE" ], "keyFile": "../../FakeItEasy.snk" },
+      "compilationOptions": { "define": [ "FEATURE_NETCORE_REFLECTION_API", "NUNITLITE" ], "keyFile": "../../FakeItEasy.snk" },
       "dependencies": {
-        "Castle.Core": "3.3.4-dev",
+        "Castle.Core": "3.3.4",
         "System.Console": "4.0.0-beta-23516",
         "System.Linq.Expressions": "4.0.11-beta-23516",
+        "System.Reflection": "4.1.0-beta-23516",
         "System.Reflection.Extensions": "4.0.1-beta-23516",
+        "System.Reflection.TypeExtensions": "4.1.0-beta-23516",
         "System.Threading.Tasks.Parallel": "4.0.1-beta-23516",
         "Microsoft.CSharp": "4.0.1-beta-23516",
         "nunitlite": "3.0.1"

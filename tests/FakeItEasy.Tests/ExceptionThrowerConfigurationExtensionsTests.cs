@@ -2,6 +2,9 @@ namespace FakeItEasy.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using FakeItEasy.Configuration;
     using FakeItEasy.Core;
     using FluentAssertions;

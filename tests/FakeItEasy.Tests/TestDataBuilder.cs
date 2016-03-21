@@ -1,6 +1,9 @@
 namespace FakeItEasy.Tests
 {
     using System;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using System.Diagnostics.CodeAnalysis;
 
     public abstract class TestDataBuilder<TSubject, TBuilder> where TBuilder : TestDataBuilder<TSubject, TBuilder>
@@ -43,7 +46,12 @@ namespace FakeItEasy.Tests
 
         private static TBuilder CreateBuilderInstance()
         {
+#if !FEATURE_NETCORE_REFLECTION_API
             return (TBuilder)Activator.CreateInstance(typeof(TBuilder), nonPublic: true);
+#else
+            var constructor = typeof(TBuilder).GetConstructor(new Type[0]);
+            return (TBuilder)constructor.Invoke(new object[0]);
+#endif
         }
     }
 }

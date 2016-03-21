@@ -6,6 +6,10 @@ namespace FakeItEasy.Tests.Core
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
+    using FakeItEasy;
     using FakeItEasy.Core;
     using FluentAssertions;
     using NUnit.Framework;
@@ -148,7 +152,7 @@ namespace FakeItEasy.Tests.Core
         public void Built_in_formatters_should_have_lower_than_default_priority()
         {
             // Arrange
-            var allArgumentValueFormatters = typeof(A).Assembly.GetTypes()
+            var allArgumentValueFormatters = typeof(A).GetTypeInfo().Assembly.GetTypes()
                 .Where(t => t.CanBeInstantiatedAs(typeof(IArgumentValueFormatter)))
                 .Select(Activator.CreateInstance)
                 .Cast<IArgumentValueFormatter>();

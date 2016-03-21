@@ -1,9 +1,13 @@
 namespace FakeItEasy.Tests
 {
     using System;
+#if FEATURE_SERIALIZATION
     using System.Runtime.Serialization;
+#endif
 
+#if FEATURE_SERIALIZATION
     [Serializable]
+#endif
     public class DummyException
         : Exception
     {
@@ -21,9 +25,11 @@ namespace FakeItEasy.Tests
         {
         }
 
+#if FEATURE_SERIALIZATION
         protected DummyException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
+#endif
     }
 }

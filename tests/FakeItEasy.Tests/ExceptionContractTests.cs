@@ -2,7 +2,9 @@ namespace FakeItEasy.Tests
 {
     using System;
     using System.Reflection;
+#if FEATURE_SERIALIZATION
     using System.Runtime.Serialization;
+#endif
     using NUnit.Framework;
 
     public abstract class ExceptionContractTests<T> where T : Exception
@@ -15,6 +17,7 @@ namespace FakeItEasy.Tests
             this.exception = this.CreateException();
         }
 
+#if FEATURE_SERIALIZATION
         [Test]
         public void Exception_should_provide_serialization_constructor()
         {
@@ -27,6 +30,7 @@ namespace FakeItEasy.Tests
             Assert.That(constructor, Is.Not.Null, "Exception classes should implement a constructor serialization constructor");
             Assert.That(!constructor.IsPublic && !constructor.IsPrivate, "Serialization constructor should be protected.");
         }
+#endif
 
         [Test]
         public void Exception_should_provide_message_only_constructor()
@@ -53,11 +57,13 @@ namespace FakeItEasy.Tests
             Assert.That(result.Message, Does.StartWith("A message"));
         }
 
+#if FEATURE_SERIALIZATION
         [Test]
         public void Exception_should_be_serializable()
         {
             Assert.That(this.exception, Is.BinarySerializable);
         }
+#endif
 
         [Test]
         public void Exception_should_provide_message_and_inner_exception_constructor()

@@ -38,6 +38,7 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             Assert.That(result.ProxyWasSuccessfullyGenerated, Is.True);
         }
 
+#if FEATURE_NUNIT_SETCULTURE
         [TestCase(typeof(object))]
         [TestCase(typeof(string))]
         [TestCase(typeof(IServiceProvider))]
@@ -53,6 +54,7 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             Assert.That(result.ProxyWasSuccessfullyGenerated, Is.False);
             Assert.That(result.ReasonForFailure, Is.EqualTo("The delegate proxy generator can only create proxies for delegate types."));
         }
+#endif
 
         [TestCase(typeof(Func<int>))]
         [TestCase(typeof(Action))]
@@ -200,6 +202,7 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             Assert.That(fakedObject, Is.SameAs(proxy));
         }
 
+#if FEATURE_NUNIT_SETCULTURE
         [Test]
         [SetCulture("en-US")]
         public void Should_return_false_for_non_invoke_method_when_asking_if_it_can_be_intercepted()
@@ -216,6 +219,7 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             Assert.That(result, Is.False);
             Assert.That(reason, Is.EqualTo("Only the Invoke method can be intercepted on delegates."));
         }
+#endif
 
         [Test]
         public void Should_return_true_for_invoke_method_when_asking_if_it_can_be_intercepted()

@@ -17,6 +17,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             }
         }
 
+#if FEATURE_SERIALIZATION
         [Test]
         public void CallData_should_be_serializable()
         {
@@ -44,5 +45,6 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             // Assert
             Assert.That(data, Is.BinarySerializable);
         }
+#endif
     }
 }

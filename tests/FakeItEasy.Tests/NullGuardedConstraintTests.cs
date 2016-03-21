@@ -11,7 +11,6 @@ namespace FakeItEasy.Tests
     public class NullGuardedConstraintTests
     {
         private NullGuardedConstraint constraint;
-        private MessageWriter writer;
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "text", Justification = "Required for testing.")]
         public static void UnguardedStaticMethod(string text)

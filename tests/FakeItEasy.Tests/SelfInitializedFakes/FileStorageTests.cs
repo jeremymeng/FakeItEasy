@@ -4,7 +4,12 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
+#if FEATURE_SERIALIZATION
     using System.Runtime.Serialization.Formatters.Binary;
+#endif
     using FakeItEasy.SelfInitializedFakes;
     using NUnit.Framework;
 
@@ -73,7 +78,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             storage.Save(calls);
 
             // Assert
-            var savedCalls = this.DeserializeCalls(fileStream.GetBuffer());
+            var savedCalls = this.DeserializeCalls(fileStream.ToArray());
 
             Assert.That(savedCalls.SequenceEqual(calls, new CallDataComparer()));
         }
@@ -99,19 +104,29 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
 
         private byte[] SerializeCalls(IEnumerable<CallData> calls)
         {
+#if FEATURE_SERIALIZATION
             using (var stream = new MemoryStream())
             {
                 new BinaryFormatter().Serialize(stream, calls);
                 return stream.GetBuffer();
             }
+#else
+            throw new System.NotImplementedException();
+
+#endif
         }
 
         private IEnumerable<CallData> DeserializeCalls(byte[] serializedCalls)
         {
+#if FEATURE_SERIALIZATION
             using (var stream = new MemoryStream(serializedCalls))
             {
                 return (IEnumerable<CallData>)new BinaryFormatter().Deserialize(stream);
             }
+#else
+            throw new System.NotImplementedException();
+
+#endif
         }
 
         private CallData CreateDummyCallData()

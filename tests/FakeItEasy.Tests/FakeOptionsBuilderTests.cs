@@ -2,6 +2,9 @@ namespace FakeItEasy.Tests
 {
     using System;
     using System.Linq;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using FakeItEasy.Creation;
     using FluentAssertions;
     using NUnit.Framework;
@@ -27,7 +30,7 @@ namespace FakeItEasy.Tests
         public void Built_in_options_builders_should_have_lower_than_default_priority()
         {
             // Arrange
-            var allOptionsBuilders = typeof(A).Assembly.GetTypes()
+            var allOptionsBuilders = typeof(A).GetTypeInfo().Assembly.GetTypes()
                 .Where(t => t.CanBeInstantiatedAs(typeof(IFakeOptionsBuilder)))
                 .Select(Activator.CreateInstance)
                 .Cast<IFakeOptionsBuilder>();

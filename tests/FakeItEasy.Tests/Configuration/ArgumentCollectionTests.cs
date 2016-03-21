@@ -5,6 +5,9 @@ namespace FakeItEasy.Tests.Configuration
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using FakeItEasy.Configuration;
     using FakeItEasy.Tests.TestHelpers;
     using FluentAssertions;
@@ -103,6 +106,7 @@ namespace FakeItEasy.Tests.Configuration
             arguments.Should().Equal(1, 2, 3);
         }
 
+#if FEATURE_SERIALIZATION
         [Test]
         public void Should_be_serializable_when_arguments_are_equatable()
         {
@@ -116,6 +120,7 @@ namespace FakeItEasy.Tests.Configuration
             // Assert
             collection.Should().BeBinarySerializable();
         }
+#endif
 
         private ArgumentCollection CreateFakeArgumentList(IEnumerable<string> argumentNames, params object[] arguments)
         {

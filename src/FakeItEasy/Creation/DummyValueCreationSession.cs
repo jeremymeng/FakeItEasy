@@ -142,7 +142,7 @@ namespace FakeItEasy.Creation
                     return true;
                 }
 
-                if (typeOfDummy.IsGenericType && typeOfDummy.GetGenericTypeDefinition() == typeof(Task<>))
+                if (typeOfDummy.GetTypeInfo().IsGenericType && typeOfDummy.GetGenericTypeDefinition() == typeof(Task<>))
                 {
                     var typeOfTaskResult = typeOfDummy.GetGenericArguments()[0];
                     object taskResult;
@@ -175,7 +175,7 @@ namespace FakeItEasy.Creation
             {
                 result = default(object);
 
-                if (typeOfDummy.IsGenericType && typeOfDummy.GetGenericTypeDefinition() == typeof(Lazy<>))
+                if (typeOfDummy.GetTypeInfo().IsGenericType && typeOfDummy.GetGenericTypeDefinition() == typeof(Lazy<>))
                 {
                     var typeOfLazyResult = typeOfDummy.GetGenericArguments()[0];
                     object lazyResult;

@@ -7,6 +7,7 @@ namespace FakeItEasy.Tests.Core
     public class FakeCreationExceptionTests
         : ExceptionContractTests<FakeCreationException>
     {
+#if FEATURE_NUNIT_SETCULTURE
         [Test]
         [SetCulture("en-US")]
         public void DefaultConstructor_should_set_correct_error_message()
@@ -19,6 +20,7 @@ namespace FakeItEasy.Tests.Core
             // Assert
             Assert.That(exception.Message, Is.EqualTo("Unable to create fake object."));
         }
+#endif
 
         protected override FakeCreationException CreateException()
         {

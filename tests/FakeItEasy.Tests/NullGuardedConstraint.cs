@@ -165,7 +165,7 @@ namespace FakeItEasy.Tests
 
             private static bool IsNullableType(Type type)
             {
-                return !type.IsValueType || (type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>)));
+                return !type.GetTypeInfo().IsValueType || (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>)));
             }
 
             private static void AppendArgumentList(StringBuilder builder, IEnumerable<ArgumentInfo> arguments)
@@ -337,7 +337,12 @@ namespace FakeItEasy.Tests
 
             protected override string CallDescription
             {
+#if !FEATURE_NETCORE_REFLECTION_API
                 get { return this.method.ReflectedType.Name + "." + this.method.Name; }
+#else
+                // ReflectedType will be added back in .NET Core 1.0.0 RTM
+                get { return this.method.DeclaringType.Name + "." + this.method.Name; }
+#endif
             }
 
             protected override void PerformCall(object[] arguments)
@@ -364,7 +369,12 @@ namespace FakeItEasy.Tests
 
             protected override string CallDescription
             {
+#if !FEATURE_NETCORE_REFLECTION_API
                 get { return this.constructorInfo.ReflectedType.FullName + ".ctor"; }
+#else
+                // ReflectedType will be added back in .NET Core 1.0.0 RTM
+                get { return this.constructorInfo.DeclaringType.FullName + ".ctor"; }
+#endif
             }
 
             protected override void PerformCall(object[] arguments)

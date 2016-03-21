@@ -1,5 +1,8 @@
 namespace FakeItEasy.Tests.Configuration
 {
+#if FEATURE_NETCORE_REFLECTION_API
+    using System.Reflection;
+#endif
     using FakeItEasy.Configuration;
     using FakeItEasy.Creation;
     using NUnit.Framework;

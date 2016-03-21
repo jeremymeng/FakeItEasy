@@ -18,3 +18,5 @@ artifacts
 Thumbs.db
 
 packages
+/TestResults
+launchSettings.json
