@@ -3,9 +3,7 @@ namespace FakeItEasy.SelfInitializedFakes
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-#if FEATURE_SERIALIZATION
-    using System.Runtime.Serialization.Formatters.Binary;
-#endif
+    using Newtonsoft.Json;
 
     internal class FileStorage
         : ICallStorage
@@ -66,24 +64,34 @@ namespace FakeItEasy.SelfInitializedFakes
         private void WriteCallsToFile(IEnumerable<CallData> calls)
         {
 #if FEATURE_SERIALIZATION
-            var formatter = new BinaryFormatter();
             using (var file = this.fileSystem.Open(this.fileName, FileMode.Truncate))
+            using (var sw = new StreamWriter(file))
+            using (var jsonWriter = new JsonTextWriter(sw))
             {
-                formatter.Serialize(file, calls.ToArray());
+                jsonWriter.Formatting = Formatting.None;
+                var serializer = new JsonSerializer();
+                serializer.TypeNameHandling = TypeNameHandling.All;
+                serializer.Serialize(jsonWriter, calls.ToList());
+                jsonWriter.Flush();
             }
 #else
             throw new System.NotImplementedException();
-
 #endif
         }
 
         private IEnumerable<CallData> LoadCallsFromFile()
         {
 #if FEATURE_SERIALIZATION
-            var formatter = new BinaryFormatter();
             using (var file = this.fileSystem.Open(this.fileName, FileMode.Open))
+            using (var sr = new StreamReader(file))
+            using (var jsonReader = new JsonTextReader(sr))
             {
-                return (IEnumerable<CallData>)formatter.Deserialize(file);
+                var text = sr.ReadToEnd();
+                var test = JsonConvert.DeserializeObject<List<CallData>>(text);
+                var deserializer = new JsonSerializer();
+                deserializer.TypeNameHandling = TypeNameHandling.All;
+                var result = deserializer.Deserialize<List<CallData>>(jsonReader);
+                return result;
             }
 #else
             throw new System.NotImplementedException();

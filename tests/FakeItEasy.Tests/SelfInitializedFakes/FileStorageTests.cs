@@ -4,8 +4,8 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Runtime.Serialization.Formatters.Binary;
     using FakeItEasy.SelfInitializedFakes;
+    using Newtonsoft.Json;
     using NUnit.Framework;
 
     [TestFixture]
@@ -100,8 +100,13 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
         private byte[] SerializeCalls(IEnumerable<CallData> calls)
         {
             using (var stream = new MemoryStream())
+            using (var streamWriter = new StreamWriter(stream))
+            using (var jsonWriter = new JsonTextWriter(streamWriter))
             {
-                new BinaryFormatter().Serialize(stream, calls);
+                var serializer = new JsonSerializer();
+                serializer.TypeNameHandling = TypeNameHandling.All;
+                serializer.Serialize(jsonWriter, calls.ToList());
+                jsonWriter.Flush();
                 return stream.GetBuffer();
             }
         }
@@ -109,8 +114,13 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
         private IEnumerable<CallData> DeserializeCalls(byte[] serializedCalls)
         {
             using (var stream = new MemoryStream(serializedCalls))
+            using (var streamReader = new StreamReader(stream))
+            using (var jsonReader = new JsonTextReader(streamReader))
             {
-                return (IEnumerable<CallData>)new BinaryFormatter().Deserialize(stream);
+                var deserializer = new JsonSerializer();
+                deserializer.TypeNameHandling = TypeNameHandling.All;
+                var result = deserializer.Deserialize<List<CallData>>(jsonReader);
+                return result;
             }
         }
 
