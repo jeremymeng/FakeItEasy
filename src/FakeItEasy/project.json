@@ -6,25 +6,34 @@
   "projectUrl": "",
   "licenseUrl": "",
 
+  "dependencies": {
+    "Castle.Core": "4.0.0-alpha001"
+  },
   "frameworks": {
     "net451": {
       "compilationOptions": {
-        "define": [ "FEATURE_SERIALIZATION", "FEATURE_NETCORE_REFLECTION", "FEATURE_REFLECTION_GETASSEMBLIES" ]
+        "define": [ "NET40_OR_LATER", "FEATURE_SERIALIZATION", "FEATURE_NETCORE_REFLECTION", "FEATURE_REFLECTION_GETASSEMBLIES" ],
+        "keyFile": "../../FakeItEasy.snk"
       },
       "dependencies": {
-        "Castle.Core": "3.3.3"
       }
     },
     "dotnet5.4": {
       "compilationOptions": {
-        "define": [ "FEATURE_NETCORE_REFLECTION" ]
+        "define": [ "NET40_OR_LATER", "FEATURE_NETCORE_REFLECTION" ],
+        "keyFile": "../../FakeItEasy.snk"
       },
       "dependencies": {
-        "Castle.Core": "3.3.4-dev",
         "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
         "System.Collections.Concurrent": "4.0.11-beta-23516",
+        "System.Console": "4.0.0-beta-23516",
+        "System.Diagnostics.Tools": "4.0.1-beta-23516",
+        "System.IO.FileSystem": "4.0.1-beta-23516",
+        "System.IO.FileSystem.Primitives": "4.0.1-beta-23516",
+        "System.Linq.Expressions": "4.0.11-beta-23516",
         "System.Reflection": "4.1.0-beta-23516",
         "System.Reflection.Context": "4.0.1-beta-23516",
+        "System.Reflection.Emit": "4.0.1-beta-23516",
         "System.Reflection.Extensions": "4.0.1-beta-23516",
         "System.Reflection.TypeExtensions": "4.1.0-beta-23516",
         "System.Runtime.Loader": "4.0.0-beta-23516"
@@ -32,6 +41,7 @@
     }
   },
   "compileFiles": [
+    "../AssemblyInfo.cs",
     "../CommonAssemblyInfo.cs",
     "../MethodInfoWrapper.cs"
   ]
