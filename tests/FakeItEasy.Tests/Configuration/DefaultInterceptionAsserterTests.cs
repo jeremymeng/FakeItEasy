@@ -1,6 +1,6 @@
 namespace FakeItEasy.Tests.Configuration
 {
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Configuration;

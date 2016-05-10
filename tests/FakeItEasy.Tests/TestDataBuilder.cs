@@ -1,7 +1,7 @@
 namespace FakeItEasy.Tests
 {
     using System;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using System.Diagnostics.CodeAnalysis;
@@ -46,7 +46,7 @@ namespace FakeItEasy.Tests
 
         private static TBuilder CreateBuilderInstance()
         {
-#if !FEATURE_NETCORE_REFLECTION_API
+#if !FEATURE_NETCORE_REFLECTION
             return (TBuilder)Activator.CreateInstance(typeof(TBuilder), nonPublic: true);
 #else
             var constructor = typeof(TBuilder).GetConstructor(new Type[0]);

@@ -6,7 +6,7 @@ namespace FakeItEasy.Tests.Core
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy;

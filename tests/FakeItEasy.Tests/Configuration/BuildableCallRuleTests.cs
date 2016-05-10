@@ -2,7 +2,7 @@ namespace FakeItEasy.Tests.Configuration
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Configuration;

@@ -337,7 +337,7 @@ namespace FakeItEasy.Tests
 
             protected override string CallDescription
             {
-#if !FEATURE_NETCORE_REFLECTION_API
+#if !FEATURE_NETCORE_REFLECTION
                 get { return this.method.ReflectedType.Name + "." + this.method.Name; }
 #else
                 // ReflectedType will be added back in .NET Core 1.0.0 RTM
@@ -369,7 +369,7 @@ namespace FakeItEasy.Tests
 
             protected override string CallDescription
             {
-#if !FEATURE_NETCORE_REFLECTION_API
+#if !FEATURE_NETCORE_REFLECTION
                 get { return this.constructorInfo.ReflectedType.FullName + ".ctor"; }
 #else
                 // ReflectedType will be added back in .NET Core 1.0.0 RTM

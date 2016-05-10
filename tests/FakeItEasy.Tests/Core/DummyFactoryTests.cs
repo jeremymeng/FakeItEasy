@@ -3,7 +3,7 @@ namespace FakeItEasy.Tests.Core
     using System;
     using System.Globalization;
     using System.Linq;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Tests.TestHelpers;

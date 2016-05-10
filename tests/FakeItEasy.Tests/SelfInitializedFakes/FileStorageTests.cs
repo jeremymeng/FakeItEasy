@@ -4,7 +4,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
 #if FEATURE_SERIALIZATION

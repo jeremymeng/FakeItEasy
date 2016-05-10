@@ -4,7 +4,7 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-#if FEATURE_NETCORE_REFLECTION_API
+#if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Core;
