@@ -16,6 +16,7 @@ artifacts
 *[Rr][Ee][Ss][Hh][Aa][Rr][Pp][Ee][Rr]*
 *.[Dd]ot[Ss]ettings.*
 Thumbs.db
+*.received.txt
 
 packages
 /TestResults

@@ -5,10 +5,12 @@ namespace FakeItEasy.Tests.Configuration
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Linq.Expressions;
 #if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Configuration;
+    using FakeItEasy.Tests;
     using FakeItEasy.Tests.TestHelpers;
     using FluentAssertions;
     using NUnit.Framework;
@@ -19,14 +21,16 @@ namespace FakeItEasy.Tests.Configuration
         [Test]
         public void Constructor_is_properly_guarded()
         {
-            NullGuardedConstraint.Assert(() => new ArgumentCollection(new object[] { "foo", 1 }, new[] { "foo", "bar" }));
+            Expression<Action> call = () => new ArgumentCollection(new object[] { "foo", 1 }, new[] { "foo", "bar" });
+            call.Should().BeNullGuarded();
         }
 
         [Test]
         public void Constructor_that_takes_method_is_properly_null_guarded()
         {
             var method = typeof(IFoo).GetMethod("Bar", new[] { typeof(object), typeof(object) });
-            NullGuardedConstraint.Assert(() => new ArgumentCollection(new object[] { "foo", 1 }, method));
+            Expression<Action> call = () => new ArgumentCollection(new object[] { "foo", 1 }, method);
+            call.Should().BeNullGuarded();
         }
 
         [Test]

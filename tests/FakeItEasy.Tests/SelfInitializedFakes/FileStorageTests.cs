@@ -8,6 +8,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
     using System.Reflection;
 #endif
     using FakeItEasy.SelfInitializedFakes;
+    using FluentAssertions;
     using Newtonsoft.Json;
     using NUnit.Framework;
 
@@ -42,7 +43,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             var loadedCalls = storage.Load();
 
             // Assert
-            Assert.That(loadedCalls.SequenceEqual(calls, new CallDataComparer()));
+            loadedCalls.Should().Equal(calls, new CallDataComparer().Equals);
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             var loadedCalls = storage.Load();
 
             // Assert
-            Assert.That(loadedCalls, Is.Null);
+            loadedCalls.Should().BeNull();
         }
 
         [Test]
@@ -78,7 +79,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             // Assert
             var savedCalls = this.DeserializeCalls(fileStream.ToArray());
 
-            Assert.That(savedCalls.SequenceEqual(calls, new CallDataComparer()));
+            savedCalls.Should().Equal(calls, new CallDataComparer().Equals);
         }
 
         [Test]

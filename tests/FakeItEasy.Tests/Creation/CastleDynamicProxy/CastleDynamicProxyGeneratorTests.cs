@@ -4,12 +4,14 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Linq.Expressions;
 #if FEATURE_NETCORE_REFLECTION
     using System.Reflection;
 #endif
     using FakeItEasy.Core;
     using FakeItEasy.Creation;
     using FakeItEasy.Creation.CastleDynamicProxy;
+    using FakeItEasy.Tests;
     using FluentAssertions;
     using NUnit.Framework;
     using TestHelpers;
@@ -241,8 +243,8 @@ namespace FakeItEasy.Tests.Creation.CastleDynamicProxy
             // Act
 
             // Assert
-            NullGuardedConstraint.Assert(() =>
-                this.generator.GenerateProxy(typeof(IInterfaceType), Enumerable.Empty<Type>(), null, A.Dummy<IFakeCallProcessorProvider>()));
+            Expression<Action> call = () => this.generator.GenerateProxy(typeof(IInterfaceType), Enumerable.Empty<Type>(), null, A.Dummy<IFakeCallProcessorProvider>());
+            call.Should().BeNullGuarded();
         }
 
         [Test]
