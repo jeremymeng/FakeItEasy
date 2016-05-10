@@ -1,26 +1,28 @@
 require 'albacore'
 
-msbuild_command = [
-  "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe",
-  "C:/Program Files (x86)/MSBuild/12.0/Bin/MSBuild.exe"
-].find(lambda{ raise "MSBuild not found"}) { |msbuild| File.file?(msbuild) }
+msbuild_command = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe"
+if !File.file?(msbuild_command)
+  raise "MSBuild not found"
+end
 
 nuget_command  = ".nuget/NuGet.exe"
 nunit_command  = "packages/NUnit.Runners.2.6.3/tools/nunit-console.exe"
 xunit_command = "packages/xunit.runner.console.2.0.0/tools/xunit.console.exe"
 
-solution       = "FakeItEasy.sln"
-assembly_info  = "src/CommonAssemblyInfo.cs"
-version        = IO.read(assembly_info)[/AssemblyInformationalVersion\("([^"]+)"\)/, 1]
-version_suffix = ENV["VERSION_SUFFIX"]
-nuspec         = "src/FakeItEasy.nuspec"
-logs           = "artifacts/logs"
-output         = "artifacts/output"
-tests          = "artifacts/tests"
+solution        = "FakeItEasy.sln"
+assembly_info   = "src/CommonAssemblyInfo.cs"
+version         = IO.read(assembly_info)[/AssemblyInformationalVersion\("([^"]+)"\)/, 1]
+version_suffix  = ENV["VERSION_SUFFIX"]
+nuspec          = "src/FakeItEasy.nuspec"
+analyzer_nuspec = "src/FakeItEasy.Analyzer/FakeItEasy.Analyzer.nuspec"
+logs            = "artifacts/logs"
+output          = "artifacts/output"
+tests           = "artifacts/tests"
 
 unit_tests = [
   "tests/FakeItEasy.Net35.Tests/bin/Release/FakeItEasy.Net35.Tests.dll",
   "tests/FakeItEasy.Tests/bin/Release/FakeItEasy.Tests.dll",
+  "tests/FakeItEasy.Analyzer.Tests/bin/Release/FakeItEasy.Analyzer.Tests.dll"
 ]
 
 integration_tests = [
@@ -33,7 +35,7 @@ specs = "tests/FakeItEasy.Specs/bin/Release/FakeItEasy.Specs.dll"
 repo = 'FakeItEasy/FakeItEasy'
 release_issue_labels = ['0 - Backlog', 'P2', 'build', 'documentation']
 release_issue_body = <<-eos
-**Ready** when all other issues forming part of the release are **Done**.
+**Ready** when all other issues on this milestone are **Done** and closed.
 
 - [ ] run code analysis in VS in *Release* mode and address violations (send a regular PR which must be merged before continuing)
 - [ ] if necessary, change `VERSION_SUFFIX` on [CI Server](http://teamcity.codebetter.com/admin/editBuildParams.html?id=buildType:bt929)
@@ -59,7 +61,6 @@ release_issue_body = <<-eos
     - create a new milestone for the next release
     - create new issue (like this one) for the next release, adding it to the new milestone
     - create a new draft GitHub Release
-- [ ] close all issues on this milestone
 - [ ] close this milestone
 
 [1]: https://jabbr.net/#/rooms/general-chat
@@ -197,6 +198,12 @@ desc "create the nuget package"
 exec :pack => [:build, output] do |cmd|
   cmd.command = nuget_command
   cmd.parameters "pack #{nuspec} -Version #{version}#{version_suffix} -OutputDirectory #{output}"
+end
+
+desc "create the analyzer nuget package"
+exec :pack => [:build, output] do |cmd|
+  cmd.command = nuget_command
+  cmd.parameters "pack #{analyzer_nuspec} -Version #{version}#{version_suffix} -OutputDirectory #{output}"
 end
 
 desc "create new milestone, release issue and release"

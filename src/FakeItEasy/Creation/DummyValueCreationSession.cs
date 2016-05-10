@@ -4,11 +4,11 @@ namespace FakeItEasy.Creation
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-#if NET40
+#if NET40_OR_LATER
     using System.Linq.Expressions;
 #endif
     using System.Reflection;
-#if NET40
+#if NET40_OR_LATER
     using System.Threading.Tasks;
 #endif
     using FakeItEasy.Core;
@@ -31,7 +31,7 @@ namespace FakeItEasy.Creation
             this.strategies = new ResolveStrategy[]
                 {
                     new ResolveFromDummyFactoryStrategy { DummyFactory = dummyFactory },
-#if NET40
+#if NET40_OR_LATER
                     new ResolveByCreatingTaskStrategy { Session = this },
                     new ResolveByCreatingLazyStrategy { Session = this },
 #endif
@@ -125,7 +125,7 @@ namespace FakeItEasy.Creation
             }
         }
 
-#if NET40
+#if NET40_OR_LATER
         private class ResolveByCreatingTaskStrategy : ResolveStrategy
         {
             private static readonly MethodInfo GenericFromResultMethodDefinition = CreateGenericFromResultMethodDefinition();
