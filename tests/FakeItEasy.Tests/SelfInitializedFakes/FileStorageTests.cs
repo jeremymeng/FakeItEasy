@@ -103,7 +103,6 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
 
         private byte[] SerializeCalls(IEnumerable<CallData> calls)
         {
-#if FEATURE_SERIALIZATION
             using (var stream = new MemoryStream())
             {
                 using (var sw = new StreamWriter(stream))
@@ -113,17 +112,12 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
                         new JsonSerializerSettings { NullValueHandling = NullValueHandling.Include });
                     sw.Write(serialized);
                 }
-                return stream.GetBuffer();
+                return stream.ToArray();
             }
-#else
-            throw new System.NotImplementedException();
-
-#endif
         }
 
         private IEnumerable<CallData> DeserializeCalls(byte[] serializedCalls)
         {
-#if FEATURE_SERIALIZATION
             using (var stream = new MemoryStream(serializedCalls))
             {
                 using (var sr = new StreamReader(stream))
@@ -132,10 +126,6 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
                     return deserialized;
                 }
             }
-#else
-            throw new System.NotImplementedException();
-
-#endif
         }
 
         private CallData CreateDummyCallData()
