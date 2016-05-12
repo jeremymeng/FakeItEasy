@@ -23,8 +23,7 @@ namespace FakeItEasy.Tests.TestHelpers
 
             return result;
 #else
-            throw new System.NotImplementedException();
-
+            throw new System.PlatformNotSupportedException();
 #endif
         }
     }
