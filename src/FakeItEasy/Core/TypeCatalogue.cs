@@ -77,7 +77,6 @@ namespace FakeItEasy.Core
              var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
              var loadedAssembliesReferencingFakeItEasy = loadedAssemblies.Where(assembly => assembly.ReferencesFakeItEasy());
 #else
-            var fakeItEasyLibraryName = TypeCatalogue.FakeItEasyAssembly.GetName().Name;
 
             var context = DependencyContext.Default;
             var loadedAssemblies = context.RuntimeLibraries
@@ -175,6 +174,7 @@ namespace FakeItEasy.Core
                 writer.WriteLine();
             }
         }
+
 #if !FEATURE_REFLECTION_GETASSEMBLIES
         private class CustomLoadContext : System.Runtime.Loader.AssemblyLoadContext
         {
