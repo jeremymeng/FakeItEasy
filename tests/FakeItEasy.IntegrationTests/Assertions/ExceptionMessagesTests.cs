@@ -9,6 +9,7 @@ namespace FakeItEasy.IntegrationTests.Assertions
     [TestFixture]
     public class ExceptionMessagesTests
     {
+#if FEATURE_NUNIT_SETCULTURE
         [Test]
         [SetCulture("en-US")]
         public void Exception_message_should_be_correctly_formatted()
@@ -75,6 +76,7 @@ namespace FakeItEasy.IntegrationTests.Assertions
             exception.Should().BeAnExceptionOfType<ExpectationException>()
                 .WithMessage(expectedMessage);
         }
+#endif
 
         [Test]
         public void Should_be_able_to_assert_on_void_calls_from_configuration()

@@ -49,7 +49,7 @@ namespace FakeItEasy.IntegrationTests
                 }
 
                 messageWriter.Flush();
-                actualMessage = messageWriter.Encoding.GetString(messageStream.GetBuffer());
+                actualMessage = messageWriter.Encoding.GetString(messageStream.ToArray());
             }
 
             // Assert
@@ -74,7 +74,7 @@ namespace FakeItEasy.IntegrationTests
             {
                 var catalogue = new TypeCatalogue();
 
-                File.CreateText(badAssemblyFile).Close();
+                File.CreateText(badAssemblyFile).Dispose();
                 try
                 {
                     var originalWriter = Console.Out;
@@ -95,7 +95,7 @@ namespace FakeItEasy.IntegrationTests
                 }
 
                 writer.Flush();
-                actualMessage = writer.Encoding.GetString(stream.GetBuffer());
+                actualMessage = writer.Encoding.GetString(stream.ToArray());
             }
 
             // Assert

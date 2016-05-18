@@ -1,6 +1,6 @@
 {
   "version": "1.0.0-*",
-  "description": "",
+  "description": "FakeItEasy.IntegrationTests .NET Core",
   "authors": [ "" ],
 
   "packOptions": {
@@ -22,13 +22,17 @@
         "compile": {
           "include": [
             "Program.cs",
-            "../FakeItEasy.Tests/**/*.cs"
+            "../FakeItEasy.IntegrationTests/**/*.cs"
           ]
         }
       },
       "dependencies": {
         "Castle.Core": "4.0.0-alpha004",
         "FakeItEasy": {
+          "target": "project",
+          "version": ""
+        },
+        "FakeItEasy.Dnx.Tests": {
           "target": "project",
           "version": ""
         },
