@@ -6,6 +6,7 @@
     <title>FakeItEasy - Mocking made faking easy!</title>
     <authors>Patrik Hägne, FakeItEasy contributors</authors>
     <description>It's faking amazing! The easy mocking framework for .NET that works great in C# and VB.NET alike. No need to know the difference between a stub, a mock or a spy, everything's a fake! The easy to use, refactoring friendly API makes faking a breeze.</description>
+    <releaseNotes>https://github.com/FakeItEasy/FakeItEasy/releases</releaseNotes>
     <language>en-US</language>
     <projectUrl>http://fakeiteasy.github.io/</projectUrl>
     <iconUrl>http://fakeiteasy.github.io/img/fakeiteasy_logo_256_square_white.png</iconUrl>
@@ -40,11 +41,11 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="FakeItEasy.Net40\Bin\Release\FakeItEasy.dll" target="lib\net40" />
-    <file src="FakeItEasy.Net40\Bin\Release\FakeItEasy.xml" target="lib\net40" />
-    <file src="FakeItEasy.Net45\Bin\Release\FakeItEasy.dll" target="lib\net45" />
-    <file src="FakeItEasy.Net45\Bin\Release\FakeItEasy.xml" target="lib\net45" />
-    <file src="FakeItEasy\Bin\Release\netstandard1.5\FakeItEasy.dll" target="lib\netstandard1.5" />
-    <file src="FakeItEasy\Bin\Release\netstandard1.5\FakeItEasy.xml" target="lib\netstandard1.5" />
+    <file src="..\FakeItEasy.Net40\Bin\Release\FakeItEasy.dll" target="lib\net40" />
+    <file src="..\FakeItEasy.Net40\Bin\Release\FakeItEasy.xml" target="lib\net40" />
+    <file src="..\FakeItEasy.Net45\Bin\Release\FakeItEasy.dll" target="lib\net45" />
+    <file src="..\FakeItEasy.Net45\Bin\Release\FakeItEasy.xml" target="lib\net45" />
+    <file src="Bin\Release\netstandard1.5\FakeItEasy.dll" target="lib\netstandard1.5" />
+    <file src="Bin\Release\netstandard1.5\FakeItEasy.xml" target="lib\netstandard1.5" />
   </files>
 </package>
