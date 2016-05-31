@@ -676,7 +676,7 @@
     <Compile Include="Compatibility\ReflectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FakeItEasy.nuspec" />
+    <None Include="..\FakeItEasy\FakeItEasy.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
