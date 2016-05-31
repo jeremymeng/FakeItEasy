@@ -41,11 +41,11 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\FakeItEasy.Net40\Bin\Release\FakeItEasy.dll" target="lib\net40" />
-    <file src="..\FakeItEasy.Net40\Bin\Release\FakeItEasy.xml" target="lib\net40" />
-    <file src="..\FakeItEasy.Net45\Bin\Release\FakeItEasy.dll" target="lib\net45" />
-    <file src="..\FakeItEasy.Net45\Bin\Release\FakeItEasy.xml" target="lib\net45" />
-    <file src="Bin\Release\netstandard1.5\FakeItEasy.dll" target="lib\netstandard1.5" />
-    <file src="Bin\Release\netstandard1.5\FakeItEasy.xml" target="lib\netstandard1.5" />
+    <file src="..\FakeItEasy.Net40\bin\Release\FakeItEasy.dll" target="lib\net40" />
+    <file src="..\FakeItEasy.Net40\bin\Release\FakeItEasy.xml" target="lib\net40" />
+    <file src="bin\Release\FakeItEasy.dll" target="lib\net45" />
+    <file src="bin\Release\FakeItEasy.xml" target="lib\net45" />
+    <file src="..\FakeItEasy.dotnet\bin\Release\FakeItEasy.dll" target="lib\netstandard1.5" />
+    <file src="..\FakeItEasy.dotnet\bin\Release\FakeItEasy.xml" target="lib\netstandard1.5" />
   </files>
 </package>

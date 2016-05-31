@@ -64,6 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\FakeItEasy\Compatibility\MethodInfoWrapper.cs">
+      <Link>Compatibility\MethodInfoWrapper.cs</Link>
+    </Compile>
     <Compile Include="..\FakeItEasy\Configuration\IDoNothingConfiguration.cs">
       <Link>Configuration\IDoNothingConfiguration.cs</Link>
     </Compile>
@@ -669,9 +672,6 @@
     </Compile>
     <Compile Include="..\FakeItEasy\WhereConfigurationExtensions.cs">
       <Link>WhereConfigurationExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\MethodInfoWrapper.cs">
-      <Link>Compatibility\MethodInfoWrapper.cs</Link>
     </Compile>
     <Compile Include="Compatibility\ReflectionExtensions.cs" />
   </ItemGroup>
