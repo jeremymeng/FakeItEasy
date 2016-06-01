@@ -22,7 +22,6 @@
       </group>
       <group targetFramework=".NETStandard1.5">
         <dependency id="Microsoft.Extensions.DependencyModel" version="1.0.0-rc2-final" />
-        <dependency id="NETStandard.Library" version="1.5.0-rc2-24027" />
         <dependency id="System.Collections.Concurrent" version="4.0.12-rc2-24027" />
         <dependency id="System.Console" version="4.0.0-rc2-24027" />
         <dependency id="System.Diagnostics.Tools" version="4.0.1-rc2-24027" />
@@ -42,10 +41,13 @@
   </metadata>
   <files>
     <file src="..\FakeItEasy.Net40\bin\Release\FakeItEasy.dll" target="lib\net40" />
+    <file src="..\FakeItEasy.Net40\bin\Release\FakeItEasy.pdb" target="lib\net40" />
     <file src="..\FakeItEasy.Net40\bin\Release\FakeItEasy.xml" target="lib\net40" />
     <file src="bin\Release\FakeItEasy.dll" target="lib\net45" />
+    <file src="bin\Release\FakeItEasy.pdb" target="lib\net45" />
     <file src="bin\Release\FakeItEasy.xml" target="lib\net45" />
     <file src="..\FakeItEasy.dotnet\bin\Release\FakeItEasy.dll" target="lib\netstandard1.5" />
+    <file src="..\FakeItEasy.dotnet\bin\Release\FakeItEasy.pdb" target="lib\netstandard1.5" />
     <file src="..\FakeItEasy.dotnet\bin\Release\FakeItEasy.xml" target="lib\netstandard1.5" />
   </files>
 </package>

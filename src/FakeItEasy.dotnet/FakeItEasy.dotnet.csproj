@@ -564,9 +564,6 @@
     <Compile Include="..\FakeItEasy\MethodBaseExtensions.cs">
       <Link>MethodBaseExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\FakeItEasy\MustBeImplementedException.cs">
-      <Link>MustBeImplementedException.cs</Link>
-    </Compile>
     <Compile Include="..\FakeItEasy\OutAndRefParametersConfigurationExtensions.cs">
       <Link>OutAndRefParametersConfigurationExtensions.cs</Link>
     </Compile>
@@ -650,7 +647,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FakeItEasy\FakeItEasy.nuspec" />
+    <None Include="..\FakeItEasy\FakeItEasy.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="project.json" />
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
