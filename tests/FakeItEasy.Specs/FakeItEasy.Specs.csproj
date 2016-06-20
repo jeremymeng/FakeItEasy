@@ -81,9 +81,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnyCallConfigurationSpecs.cs" />
     <Compile Include="ArgumentValueFormatterSpecs.cs" />
     <Compile Include="AssertingOnSetOnlyPropertiesSpecs.cs" />
     <Compile Include="ConfiguringPropertySetterSpecs.cs" />
+    <Compile Include="DummyCreationSpecs.cs" />
     <Compile Include="FakeSpecs.cs" />
     <Compile Include="TaskSpecs.cs" />
     <Compile Include="ConfigurationSpecs.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="CallsBaseMethodsFakeSpecs.cs" />
     <Compile Include="StrictFakeSpecs.cs" />
     <Compile Include="UnconfiguredFakeSpecs.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FakeItEasy\FakeItEasy.csproj">

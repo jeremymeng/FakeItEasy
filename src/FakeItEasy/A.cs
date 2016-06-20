@@ -4,6 +4,7 @@ namespace FakeItEasy
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Linq.Expressions;
     using FakeItEasy.Configuration;
     using FakeItEasy.Creation;
@@ -57,7 +58,20 @@ namespace FakeItEasy
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Used to specify the type of fake.")]
         public static IList<T> CollectionOfFake<T>(int numberOfFakes)
         {
-            return FakeCreator.CollectionOfFake<T>(numberOfFakes);
+            return Enumerable.Range(0, numberOfFakes).Select(_ => Fake<T>()).ToList();
+        }
+
+        /// <summary>
+        /// Creates a collection of fakes of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of fakes to create.</typeparam>
+        /// <param name="numberOfFakes">The number of fakes in the collection.</param>
+        /// <param name="optionsBuilder">A lambda where options for the built fake object can be specified.</param>
+        /// <returns>A collection of fake objects of the specified type.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is by design when using the Expression-, Action- and Func-types.")]
+        public static IList<T> CollectionOfFake<T>(int numberOfFakes, Action<IFakeOptions<T>> optionsBuilder)
+        {
+            return Enumerable.Range(0, numberOfFakes).Select(_ => Fake<T>(optionsBuilder)).ToList();
         }
 
         /// <summary>
@@ -82,9 +96,10 @@ namespace FakeItEasy
         /// <returns>A collection of dummy objects of the specified type.</returns>
         /// <exception cref="ArgumentException">Dummies of the specified type can not be created.</exception>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Used to specify the type of dummy.")]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static IList<T> CollectionOfDummy<T>(int numberOfDummies)
         {
-            return FakeCreator.CollectionOfDummy<T>(numberOfDummies);
+            return Enumerable.Range(0, numberOfDummies).Select(_ => Dummy<T>()).ToList();
         }
 
         /// <summary>

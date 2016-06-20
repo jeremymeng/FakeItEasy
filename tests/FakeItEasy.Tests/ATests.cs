@@ -1,17 +1,21 @@
 namespace FakeItEasy.Tests
 {
     using System;
-    using System.Collections.Generic;
     using FakeItEasy.Creation;
     using FluentAssertions;
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class ATests : ConfigurableServiceLocatorTestBase
     {
-        private IFakeCreatorFacade fakeCreator;
+        private readonly IFakeCreatorFacade fakeCreator;
 
-        [Test]
+        public ATests()
+        {
+            this.fakeCreator = A.Fake<IFakeCreatorFacade>();
+            this.StubResolve(this.fakeCreator);
+        }
+
+        [Fact]
         public void Fake_without_arguments_should_call_fake_creator_with_empty_options_builder()
         {
             // Arrange
@@ -25,7 +29,7 @@ namespace FakeItEasy.Tests
             result.Should().BeSameAs(fake);
         }
 
-        [Test]
+        [Fact]
         public void Fake_with_arguments_should_call_fake_creator_with_specified_options_builder()
         {
             // Arrange
@@ -41,7 +45,7 @@ namespace FakeItEasy.Tests
             result.Should().BeSameAs(fake);
         }
 
-        [Test]
+        [Fact]
         public void Dummy_should_return_dummy_from_fake_creator()
         {
             // Arrange
@@ -53,29 +57,6 @@ namespace FakeItEasy.Tests
 
             // Assert
             result.Should().BeSameAs(dummy);
-        }
-
-        [Test]
-        public void CollectionOfFakes_should_delegate_to_fake_creator()
-        {
-            // Arrange
-            var returnedFromCreator = new List<IFoo>();
-
-            var creator = this.StubResolveWithFake<IFakeCreatorFacade>();
-            A.CallTo(() => creator.CollectionOfFake<IFoo>(10)).Returns(returnedFromCreator);
-
-            // Act
-            object result = A.CollectionOfFake<IFoo>(10);
-
-            // Assert
-            result.Should().BeSameAs(returnedFromCreator);
-        }
-
-        protected override void OnSetup()
-        {
-            base.OnSetup();
-            this.fakeCreator = A.Fake<IFakeCreatorFacade>();
-            this.StubResolve(this.fakeCreator);
         }
     }
 }

@@ -616,6 +616,9 @@
     <Compile Include="..\FakeItEasy\RootModule.cs">
       <Link>RootModule.cs</Link>
     </Compile>
+    <Compile Include="..\FakeItEasy\Sdk\Create.cs">
+      <Link>Sdk\Create.cs</Link>
+    </Compile>
     <Compile Include="..\FakeItEasy\SelfInitializedFakes\CallData.cs">
       <Link>SelfInitializedFakes\CallData.cs</Link>
     </Compile>
