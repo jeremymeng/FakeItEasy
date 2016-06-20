@@ -11,7 +11,7 @@ namespace FakeItEasy.Configuration
     /// <summary>
     ///   A collection of method arguments.
     /// </summary>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Best name to describe the type.")]

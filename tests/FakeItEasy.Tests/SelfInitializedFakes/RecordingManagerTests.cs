@@ -89,6 +89,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             recorder.IsRecording.Should().BeFalse();
         }
 
+#if FEATURE_SET_CULTURE
         [Fact]
         [UsingCulture("en-US")]
         public void ApplyNext_should_throw_when_all_calls_have_been_applied()
@@ -110,7 +111,9 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
                 .BeAnExceptionOfType<RecordingException>()
                 .WithMessage("All the recorded calls has been applied, the recorded sequence is no longer valid.");
         }
+#endif
 
+#if FEATURE_SET_CULTURE
         [Fact]
         [UsingCulture("en-US")]
         public void ApplyNext_should_throw_when_method_of_call_being_applied_does_not_match_the_next_non_applied_recorded_call()
@@ -128,6 +131,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
                 .BeAnExceptionOfType<RecordingException>()
                 .WithMessage("The method of the call did not match the method of the recorded call, the recorded sequence is no longer valid.*");
         }
+#endif
 
         [Fact]
         public void RecordCall_should_add_call_to_recorded_calls()

@@ -5,7 +5,7 @@ namespace FakeItEasy.Core
     /// <summary>
     /// Keeps track of metadata for interceptions.
     /// </summary>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     internal class CallRuleMetadata

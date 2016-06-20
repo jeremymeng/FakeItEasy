@@ -1,4 +1,5 @@
-﻿namespace FakeItEasy.Tests.TestHelpers
+﻿#if FEATURE_SET_CULTURE
+namespace FakeItEasy.Tests.TestHelpers
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -37,3 +38,4 @@
         }
     }
 }
+#endif

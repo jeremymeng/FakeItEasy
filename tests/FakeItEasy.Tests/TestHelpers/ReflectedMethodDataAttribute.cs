@@ -1,4 +1,5 @@
-﻿namespace FakeItEasy.Tests.TestHelpers
+﻿#if !FEATURE_NETCORE_REFLECTION // ReflectedType is not supported on .NET Core
+namespace FakeItEasy.Tests.TestHelpers
 {
     using System;
     using System.Collections.Generic;
@@ -83,3 +84,4 @@
         }
     }
 }
+#endif

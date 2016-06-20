@@ -2,7 +2,7 @@ namespace FakeItEasy.Tests.TestHelpers
 {
     using System;
     using System.IO;
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     using System.Runtime.Serialization.Formatters.Binary;
 #endif
 
@@ -10,7 +10,7 @@ namespace FakeItEasy.Tests.TestHelpers
     {
         public static T SerializeAndDeserialize<T>(T value)
         {
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
             T result;
 
             var formatter = new BinaryFormatter();

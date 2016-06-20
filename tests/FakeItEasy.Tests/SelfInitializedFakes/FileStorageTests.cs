@@ -4,6 +4,9 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+#if FEATURE_NETCORE_REFLECTION
+    using System.Reflection;
+#endif
     using FakeItEasy.SelfInitializedFakes;
     using FluentAssertions;
     using Newtonsoft.Json;
@@ -72,7 +75,7 @@ namespace FakeItEasy.Tests.SelfInitializedFakes
             storage.Save(calls);
 
             // Assert
-            var savedCalls = this.DeserializeCalls(fileStream.GetBuffer());
+            var savedCalls = this.DeserializeCalls(fileStream.ToArray());
 
             savedCalls.Should().Equal(calls, new CallDataComparer().Equals);
         }

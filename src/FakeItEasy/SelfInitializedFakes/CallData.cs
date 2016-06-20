@@ -9,6 +9,9 @@ namespace FakeItEasy.SelfInitializedFakes
     /// <summary>
     /// DTO for recorded calls.
     /// </summary>
+#if FEATURE_BINARY_SERIALIZATION
+    [Serializable]
+#endif
     public class CallData
     {
         /// <summary>

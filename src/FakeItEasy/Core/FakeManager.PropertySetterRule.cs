@@ -6,7 +6,7 @@ namespace FakeItEasy.Core
     /// <content>Property setter rule.</content>
     public partial class FakeManager
     {
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         [Serializable]
 #endif
         private class PropertySetterRule

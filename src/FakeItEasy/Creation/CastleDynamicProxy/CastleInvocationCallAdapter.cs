@@ -10,7 +10,7 @@ namespace FakeItEasy.Creation.CastleDynamicProxy
     /// <summary>
     /// An adapter that adapts an <see cref="IInvocation" /> to a <see cref="IFakeObjectCall" />.
     /// </summary>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     internal class CastleInvocationCallAdapter

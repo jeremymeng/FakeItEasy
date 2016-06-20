@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -29,7 +30,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;FEATURE_SERIALIZATION</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;FEATURE_BINARY_SERIALIZATION;FEATURE_SET_CULTURE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\FakeItEasy.Tests.ruleset</CodeAnalysisRuleSet>
@@ -41,7 +42,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>Bin\Release\</OutputPath>
-    <DefineConstants>TRACE;FEATURE_SERIALIZATION</DefineConstants>
+    <DefineConstants>TRACE;FEATURE_BINARY_SERIALIZATION;FEATURE_SET_CULTURE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\FakeItEasy.Tests.ruleset</CodeAnalysisRuleSet>
@@ -62,10 +63,6 @@
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.4-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -181,6 +178,7 @@
     <Compile Include="ReturnValueConfigurationExtensionsTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SelfInitializedFakes\CallDataTests.cs" />
     <Compile Include="SelfInitializedFakes\FileStorageTests.cs" />
     <Compile Include="SelfInitializedFakes\RecordingExceptionTests.cs" />
     <Compile Include="SelfInitializedFakes\SelfInitializationRuleTests.cs" />
@@ -248,5 +246,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
 </Project>

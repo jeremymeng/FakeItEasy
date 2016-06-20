@@ -12,27 +12,27 @@ namespace FakeItEasy.Core
     /// because <see cref="IFakeCallProcessorProvider"/> doesn't require serializability before the first call of <see cref="Fetch"/> or
     /// <see cref="EnsureInitialized"/> (see remarks section of <see cref="IFakeCallProcessorProvider"/>).
     /// </remarks>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     internal class FakeManagerProvider : IFakeCallProcessorProvider
     {
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         [NonSerialized]
 #endif
         private readonly FakeManager.Factory fakeManagerFactory;
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         [NonSerialized]
 #endif
         private readonly IFakeManagerAccessor fakeManagerAccessor;
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         [NonSerialized]
 #endif
         private readonly Type typeOfFake;
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         [NonSerialized]
 #endif
         private readonly IProxyOptions proxyOptions;

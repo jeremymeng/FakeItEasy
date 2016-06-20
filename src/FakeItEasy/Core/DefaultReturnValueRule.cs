@@ -3,7 +3,7 @@ namespace FakeItEasy.Core
     using System;
     using FakeItEasy.Creation;
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     internal class DefaultReturnValueRule

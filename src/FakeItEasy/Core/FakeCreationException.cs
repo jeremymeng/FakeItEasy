@@ -1,14 +1,14 @@
 namespace FakeItEasy.Core
 {
     using System;
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     using System.Runtime.Serialization;
 #endif
 
     /// <summary>
     /// An exception that is thrown when there was an error creating a fake object.
     /// </summary>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     public class FakeCreationException
@@ -41,7 +41,7 @@ namespace FakeItEasy.Core
         {
         }
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeCreationException"/> class.
         /// </summary>

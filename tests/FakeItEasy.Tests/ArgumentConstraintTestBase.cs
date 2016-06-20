@@ -1,5 +1,6 @@
 namespace FakeItEasy.Tests
 {
+    using System.Reflection;
     using System.Text;
     using FakeItEasy.Core;
     using FakeItEasy.Tests.TestHelpers;
@@ -14,6 +15,7 @@ namespace FakeItEasy.Tests
 
         private IArgumentConstraint Constraint => this.ConstraintField;
 
+#if !FEATURE_NETCORE_REFLECTION // ReflectedType is not supported on .NET Core
         [Theory]
         [ReflectedMethodData("InvalidValues")]
         public void IsValid_should_return_false_for_invalid_values(object invalidValue)
@@ -29,6 +31,7 @@ namespace FakeItEasy.Tests
 
             result.Should().BeTrue();
         }
+#endif
 
         [Fact]
         public virtual void Constraint_should_provide_correct_description()

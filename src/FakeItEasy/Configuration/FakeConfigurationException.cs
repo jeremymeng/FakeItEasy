@@ -1,7 +1,7 @@
 namespace FakeItEasy.Configuration
 {
     using System;
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     using System.Runtime.Serialization;
 #endif
 
@@ -9,7 +9,7 @@ namespace FakeItEasy.Configuration
     /// An exception that can be thrown when something goes wrong with the configuration
     /// of a fake object.
     /// </summary>
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
     [Serializable]
 #endif
     public class FakeConfigurationException
@@ -41,7 +41,7 @@ namespace FakeItEasy.Configuration
         {
         }
 
-#if FEATURE_SERIALIZATION
+#if FEATURE_BINARY_SERIALIZATION
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeConfigurationException"/> class.
         /// </summary>
