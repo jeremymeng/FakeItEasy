@@ -20,9 +20,9 @@ namespace FakeItEasy.Core
             var fakeItEasyLibraryName = TypeCatalogue.FakeItEasyAssembly.GetName().Name;
             var context = Microsoft.Extensions.DependencyModel.DependencyContext.Default;
 
-            return context.RuntimeLibraries.Any(
-                library => library.Dependencies.Any(
-                    dependency => string.Equals(dependency.Name, fakeItEasyLibraryName, System.StringComparison.Ordinal)));
+            var runtimeLib = context.RuntimeLibraries
+                .SingleOrDefault(library => string.Equals(library.Name, assembly.Name(), System.StringComparison.Ordinal));
+            return runtimeLib != null && runtimeLib.Dependencies.Any(dependency => string.Equals(dependency.Name, fakeItEasyLibraryName, System.StringComparison.Ordinal));
 #endif
         }
 
