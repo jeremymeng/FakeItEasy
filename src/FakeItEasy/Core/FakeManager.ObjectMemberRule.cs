@@ -23,7 +23,12 @@ namespace FakeItEasy.Core
                         typeof(object).GetMethod("GetHashCode", new Type[] { })
                     };
 
-            public FakeManager FakeManager { get; set; }
+            private readonly FakeManager fakeManager;
+
+            public ObjectMemberRule(FakeManager fakeManager)
+            {
+                this.fakeManager = fakeManager;
+            }
 
             public int? NumberOfTimesToCall
             {
@@ -80,7 +85,7 @@ namespace FakeItEasy.Core
                     return false;
                 }
 
-                fakeObjectCall.SetReturnValue(this.FakeManager.GetHashCode());
+                fakeObjectCall.SetReturnValue(this.fakeManager.GetHashCode());
 
                 return true;
             }
@@ -92,7 +97,7 @@ namespace FakeItEasy.Core
                     return false;
                 }
 
-                fakeObjectCall.SetReturnValue("Faked {0}".FormatInvariant(this.FakeManager.FakeObjectType.FullName));
+                fakeObjectCall.SetReturnValue("Faked {0}".FormatInvariant(this.fakeManager.FakeObjectType.FullName));
 
                 return true;
             }
@@ -108,7 +113,7 @@ namespace FakeItEasy.Core
 
                 if (argument != null)
                 {
-                    fakeObjectCall.SetReturnValue(argument.Tag.Equals(this.FakeManager));
+                    fakeObjectCall.SetReturnValue(argument.Tag.Equals(this.fakeManager));
                 }
                 else
                 {

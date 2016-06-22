@@ -394,9 +394,6 @@
     <Compile Include="..\FakeItEasy\Creation\DefaultFakeAndDummyManager.cs">
       <Link>Creation\DefaultFakeAndDummyManager.cs</Link>
     </Compile>
-    <Compile Include="..\FakeItEasy\Creation\DefaultFakeCreatorFacade.cs">
-      <Link>Creation\DefaultFakeCreatorFacade.cs</Link>
-    </Compile>
     <Compile Include="..\FakeItEasy\Creation\DelegateProxies\DelegateProxyGenerator.cs">
       <Link>Creation\DelegateProxies\DelegateProxyGenerator.cs</Link>
     </Compile>
@@ -414,9 +411,6 @@
     </Compile>
     <Compile Include="..\FakeItEasy\Creation\IFakeAndDummyManager.cs">
       <Link>Creation\IFakeAndDummyManager.cs</Link>
-    </Compile>
-    <Compile Include="..\FakeItEasy\Creation\IFakeCreatorFacade.cs">
-      <Link>Creation\IFakeCreatorFacade.cs</Link>
     </Compile>
     <Compile Include="..\FakeItEasy\Creation\IFakeObjectCreator.cs">
       <Link>Creation\IFakeObjectCreator.cs</Link>

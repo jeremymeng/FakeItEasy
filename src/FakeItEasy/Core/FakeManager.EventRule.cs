@@ -16,6 +16,8 @@ namespace FakeItEasy.Core
         private class EventRule
             : IFakeObjectCallRule
         {
+            private readonly FakeManager fakeManager;
+
 #if FEATURE_BINARY_SERIALIZATION
             [NonSerialized]
 #endif
@@ -27,7 +29,10 @@ namespace FakeItEasy.Core
 #endif
             private Dictionary<object, Delegate> registeredEventHandlersField;
 
-            public FakeManager FakeManager { private get; set; }
+            public EventRule(FakeManager fakeManager)
+            {
+                this.fakeManager = fakeManager;
+            }
 
             public int? NumberOfTimesToCall
             {
@@ -154,7 +159,7 @@ namespace FakeItEasy.Core
 
                 if (this.RegisteredEventHandlers.TryGetValue(call.Event, out raiseMethod))
                 {
-                    var arguments = argumentProvider.GetEventArguments(this.FakeManager.Object);
+                    var arguments = argumentProvider.GetEventArguments(this.fakeManager.Object);
 
                     try
                     {
