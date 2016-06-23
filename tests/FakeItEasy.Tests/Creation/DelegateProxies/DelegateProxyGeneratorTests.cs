@@ -46,7 +46,6 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             result.ProxyWasSuccessfullyGenerated.Should().BeTrue();
         }
 
-#if FEATURE_SET_CULTURE
         [Theory]
         [InlineData(typeof(object))]
         [InlineData(typeof(string))]
@@ -64,7 +63,6 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             result.ProxyWasSuccessfullyGenerated.Should().BeFalse();
             result.ReasonForFailure.Should().Be("The delegate proxy generator can only create proxies for delegate types.");
         }
-#endif
 
         [Theory]
         [InlineData(typeof(Func<int>))]
@@ -268,7 +266,6 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             fakedObject.Should().BeSameAs(proxy);
         }
 
-#if FEATURE_SET_CULTURE
         [Fact]
         [UsingCulture("en-US")]
         public void Should_return_false_for_non_invoke_method_when_asking_if_it_can_be_intercepted()
@@ -285,7 +282,6 @@ namespace FakeItEasy.Tests.Creation.DelegateProxies
             result.Should().BeFalse();
             reason.Should().Be("Only the Invoke method can be intercepted on delegates.");
         }
-#endif
 
         [Fact]
         public void Should_return_true_for_invoke_method_when_asking_if_it_can_be_intercepted()

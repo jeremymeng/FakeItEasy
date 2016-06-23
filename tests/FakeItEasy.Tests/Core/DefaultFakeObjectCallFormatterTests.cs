@@ -61,7 +61,6 @@ namespace FakeItEasy.Tests.Core
             description.Should().EndWith("()");
         }
 
-#if FEATURE_SET_CULTURE
         [Fact]
         [UsingCulture("en-US")]
         public void Should_write_argument_list()
@@ -77,7 +76,6 @@ namespace FakeItEasy.Tests.Core
             // Assert
             description.Should().EndWith("(argument1: \"argument value\", argument2: 1)");
         }
-#endif
 
         [Fact]
         public void Should_put_each_argument_on_separate_line_when_more_than_two_arguments()
