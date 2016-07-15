@@ -16,13 +16,13 @@ namespace FakeItEasy.IntegrationTests
         public void Should_warn_of_duplicate_input_assemblies_with_different_paths()
         {
             // Arrange
-            var currentDirectoryName = new DirectoryInfo(Environment.CurrentDirectory).Name;
+            var currentDirectoryName = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
 
             // FakeItEasy.IntegrationTests.External has copies of many of the assemblies used in these
             // tests as well. By specifying assembly paths from that directory, the catalog will see
             // those assemblies in both locations, and should fail to load the duplicates.
             var directoryToScan = Path.Combine(
-                Environment.CurrentDirectory,
+                Directory.GetCurrentDirectory(),
                 Path.Combine(@"..\..\..\FakeItEasy.IntegrationTests.External\bin", currentDirectoryName));
 
             var expectedMessageFormat =
@@ -49,7 +49,7 @@ namespace FakeItEasy.IntegrationTests
                 }
 
                 messageWriter.Flush();
-                actualMessage = messageWriter.Encoding.GetString(messageStream.GetBuffer());
+                actualMessage = messageWriter.Encoding.GetString(messageStream.ToArray());
             }
 
             // Assert
@@ -74,7 +74,7 @@ namespace FakeItEasy.IntegrationTests
             {
                 var catalogue = new TypeCatalogue();
 
-                File.CreateText(badAssemblyFile).Close();
+                File.CreateText(badAssemblyFile).Dispose();
                 try
                 {
                     var originalWriter = Console.Out;
@@ -95,7 +95,7 @@ namespace FakeItEasy.IntegrationTests
                 }
 
                 writer.Flush();
-                actualMessage = writer.Encoding.GetString(stream.GetBuffer());
+                actualMessage = writer.Encoding.GetString(stream.ToArray());
             }
 
             // Assert
@@ -109,7 +109,7 @@ namespace FakeItEasy.IntegrationTests
             var catalogue = new TypeCatalogue();
 
             // Act
-            catalogue.Load(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
+            catalogue.Load(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"));
 
             // Assert
             catalogue.GetAvailableTypes().Should().Contain(typeof(A));
@@ -122,7 +122,7 @@ namespace FakeItEasy.IntegrationTests
             var catalogue = new TypeCatalogue();
 
             // Act
-            catalogue.Load(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
+            catalogue.Load(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"));
 
             // Assert
             catalogue.GetAvailableTypes().Should().Contain(typeof(DoubleValueFormatter));
@@ -135,7 +135,7 @@ namespace FakeItEasy.IntegrationTests
             var catalogue = new TypeCatalogue();
 
             // Act
-            catalogue.Load(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
+            catalogue.Load(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"));
 
             // Assert
             catalogue.GetAvailableTypes().Select(type => type.FullName).Should().Contain("FakeItEasy.IntegrationTests.External.GuidValueFormatter");
@@ -148,7 +148,7 @@ namespace FakeItEasy.IntegrationTests
             var catalogue = new TypeCatalogue();
 
             // Act
-            catalogue.Load(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
+            catalogue.Load(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"));
 
             // Assert
             catalogue.GetAvailableTypes().Should().NotContain(typeof(string));

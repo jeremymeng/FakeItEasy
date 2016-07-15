@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0-*",
+  "description": "FakeItEasy.IntegrationTests.dotnet Class Library",
+  "authors": [ "" ],
+  "packOptions": {
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
+
+  "buildOptions": {
+    "keyFile": "../../FakeItEasy.snk",
+    "compile": {
+      "include": [
+        "../FakeItEasy.IntegrationTests/**/*.cs"
+      ],
+      "exclude": [
+      ]
+    }
+  },
+
+  "dependencies": {
+    "xunit.abstractions": "2.0.0",
+    "xunit.extensibility.core": "2.1.0",
+    "xunit.extensibility.execution": "2.1.0"
+  },
+
+  "testRunner": "xunit",
+  "frameworks": {
+    "netcoreapp1.0": {
+      "buildOptions": {
+        "define": [ "NETCORE", "FEATURE_NETCORE_REFLECTION" ]
+      },
+      "dependencies": {
+        "Castle.Core": "4.0.0-alpha001",
+        "FakeItEasy": {
+          "target": "project",
+          "version": "99.99.99-wrapped"
+        },
+        "FakeItEasy.Tests.dotnet": {
+          "target": "project",
+          "version": ""
+        },
+        "FluentAssertions": "4.6.3",
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        },
+        "dotnet-test-xunit": "2.2.0-preview2-build1029"
+      },
+      "imports": [ "dotnet5.4", "portable-net451+win81" ]
+    }
+  }
+}
