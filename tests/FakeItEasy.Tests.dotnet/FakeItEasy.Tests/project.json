@@ -9,14 +9,14 @@
   },
 
   "buildOptions": {
-    "keyFile": "../../FakeItEasy.snk",
+    "keyFile": "../../../FakeItEasy.snk",
     "compile": {
       "include": [
-        "../FakeItEasy.Tests/**/*.cs"
+        "../../FakeItEasy.Tests/**/*.cs"
       ],
       "exclude": [
-        "../FakeItEasy.Tests/RecordersTests.cs",
-        "../FakeItEasy.Tests/SelfInitializedFakes/*.cs"
+        "../../FakeItEasy.Tests/RecordersTests.cs",
+        "../../FakeItEasy.Tests/SelfInitializedFakes/*.cs"
       ]
     },
     "define": [ "NETCORE" ]

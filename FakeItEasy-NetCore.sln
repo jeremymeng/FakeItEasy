@@ -124,7 +124,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeItEasy", "src\FakeItEas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeItEasy.dotnet", "src\FakeItEasy.dotnet\FakeItEasy.dotnet.csproj", "{CF137AE3-7C4F-41BD-A4AD-762BBED2255E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FakeItEasy.Tests.dotnet", "tests\FakeItEasy.Tests.dotnet\FakeItEasy.Tests.dotnet.xproj", "{AA7CF6E8-C3F2-43CC-A765-5B05AADED390}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FakeItEasy.Tests.dotnet", "tests\FakeItEasy.Tests.dotnet\FakeItEasy.Tests\FakeItEasy.Tests.dotnet.xproj", "{AA7CF6E8-C3F2-43CC-A765-5B05AADED390}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CF137AE3-7C4F-41BD-A4AD-762BBED2255E} = {CF137AE3-7C4F-41BD-A4AD-762BBED2255E}
 	EndProjectSection
